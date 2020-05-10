@@ -11,7 +11,3 @@ body, html {
   background-repeat: no-repeat;
   background-size: contain;
 }
-
-::placeholder {
-  color: gray;
-}
