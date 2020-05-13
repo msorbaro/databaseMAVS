@@ -1,13 +1,57 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$white-color: #FCFDFF;
+
+
 body, html {
-  font-family: "Roboto", sans-serif;
-  background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#5e80bb 100%);
+  font-family: "Avenir Next", sans-serif;
+  background:$white-color;
   height: 100%;
 }
 
-.logo {
-  background-image: url('img/tim.png');
-  width: 100px;
-  height: 100px;
-  background-repeat: no-repeat;
-  background-size: contain;
+.homeInput{
+  text-align: center;
+}
+h1 {
+  color: $dark-blue;
+  font-weight: 600;
+  font-size:40px;
+  padding: 0em; 
+  margin:  auto;
+}
+h2{
+  color: $dark-blue;
+  font-weight: normal;
+  font-size: 20px;
+  padding: 1em;
+  margin: auto;
+}
+
+.logo{
+  width: 10%;
+}
+
+.mainSearchBar {
+  font-family: "Avenir Next", sans-serif;
+  border-color: $dark-blue;
+  border-width: 0.5px;
+  outline: none;
+  font-size: 12px;
+  width: 50%;
+  padding: 0.5em;
+}
+.CompaniesList {
+  list-style: none;
+  margin:  auto; 
+  width: 51%;
+  padding: 0em;
+}
+
+.dropDown  {
+  padding: 0.5em;
+  border-style: solid;
+  border-color: $dark-blue;
+  border-width: 0.5px 2px;
 }
