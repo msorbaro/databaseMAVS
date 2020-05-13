@@ -54,7 +54,7 @@ class HomePage extends Component {
     const { text } = this.state;
     return (
       <div className="homeInput">
-        <img className="logo" src={logo} alt="logo" />
+        <img className="logo" src={logo} alt="BreadBoxlogo" />
         <h1>Bread Box</h1>
         <h2>Recommendations and reviews of jobs from our Dartmouth community.</h2>
         <input className="mainSearchBar" placeholder="Search for jobs..." value={text} onChange={this.onTextChanged} type="text" />

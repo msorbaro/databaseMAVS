@@ -10,6 +10,7 @@ import HomePage from './Components/home';
 import Profile from './Components/profile';
 import Company from './Components/companies';
 import reducers from './reducers';
+import logo from './img/logo.png';
 
 
 // const App = () => (<div className="test">All the REACT are belong to us!</div>);
@@ -27,11 +28,12 @@ import reducers from './reducers';
 
 const Nav = (props) => {
   return (
-    <nav>
+    <nav className="navBar">
       <ul>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/profile">Profile</NavLink></li>
-        <li><NavLink to="/company/google">test company </NavLink></li>
+        <li className="navElement"><NavLink to="/"><img className="logoAnchor" src={logo} alt="BreadBoxlogo" /></NavLink></li>
+        <li className="navElement"><NavLink to="/">Home</NavLink></li>
+        <li className="navElement"><NavLink to="/profile">Profile</NavLink></li>
+        <li className="navElement"><NavLink to="/company/google">test company </NavLink></li>
       </ul>
     </nav>
   );
