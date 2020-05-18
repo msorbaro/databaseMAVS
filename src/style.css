@@ -92,3 +92,52 @@ a:hover {
   padding: 1em;
   list-style: none; 
 }
+
+
+.login-text-box {
+  font-family: "Avenir Next", sans-serif;
+  outline: none;
+  font-size: 20px;
+  color: $dark-blue;
+}
+
+.sign-in-up-page {
+  display:  flex; 
+}
+.split-left{
+  height: 100%; 
+  width: 50%; 
+  background-color: $medium-blue; 
+}
+.left-inputs {
+ text-align: center; 
+ height: 100%;
+}
+.split-right{
+  /* width: 50%; 
+  height: 100%;  */
+  background-color: $white-color;
+}
+
+.right-inputs {
+  margin: 0; 
+  background-color: $medium-blue;
+  padding: 2em; 
+}
+
+/* .sign-in-text{
+  height:  50%; 
+
+}
+.new-to-app {
+  width:  50%; 
+
+} */
+.graphic  {
+  padding: 1em; 
+  width: 80%;
+}
+
+.login-button {
+  padding: 10px;
+}
