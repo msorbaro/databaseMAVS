@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // need to put in right url link here dependiunbg on API
-const ROOT_URL = 'https://localhost:3000/';
+const ROOT_URL = 'http://localhost:3000/';
 
 // This is where we add more actions when we need them.
 export const ActionTypes = {
@@ -55,7 +55,8 @@ export function signinUser({ email, password }, history) {
   console.log('at actions');
   return (dispatch) => {
     console.log('AFTER DISPATCH');
-    axios.post(`${ROOT_URL}/api/signin`, { email, password }).then((response) => {
+    console.log((ROOT_URL));
+    axios.post(`${ROOT_URL}api/signin`, { email, password }).then((response) => {
       // const userInfo = { username: response.data.username, password: response.data.password };
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
