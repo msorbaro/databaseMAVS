@@ -6,12 +6,15 @@ import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 // import App from './app';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import HomePage from './Components/home';
 import Profile from './Components/profile';
+import SignIn from './Components/signin';
+import SignUp from './Components/signup';
 import Company from './Components/companies';
 import reducers from './reducers';
 import logo from './img/logo.png';
-
+import { ActionTypes } from './actions';
 
 // const App = () => (<div className="test">All the REACT are belong to us!</div>);
 
@@ -25,6 +28,7 @@ import logo from './img/logo.png';
 // const Company = (props) => {
 //   return <div> this is company: {props.match.params.id} </div>;
 // };
+
 
 const Nav = (props) => {
   return (
@@ -44,6 +48,8 @@ const App = (props) => {
     <Router>
       <div>
         <Nav />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
         <Route exact path="/" component={HomePage} />
         <Route path="/profile" component={Profile} />
         <Route exact path="/company/:id" component={Company} />
@@ -54,9 +60,14 @@ const App = (props) => {
 
 
 const store = createStore(reducers, {}, compose(
-  applyMiddleware(),
+  applyMiddleware(thunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f,
 ));
+
+const token = localStorage.getItem('token');
+if (token) {
+  store.dispatch({ type: ActionTypes.AUTH_USER });
+}
 
 // we now wrap App in a Provider
 ReactDOM.render(

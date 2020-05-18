@@ -7,6 +7,8 @@ const ROOT_URL = 'https://localhost:3000/';
 export const ActionTypes = {
   FETCH_COMPANIES: 'FETCH_COMPANIES',
   FETCH_USER: 'FETCH_USER',
+  AUTH_USER: 'AUTH_USER',
+
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -49,37 +51,62 @@ export function authError(error, code) {
   };
 }
 
-export function signinUser(fields, history) {
+export function signinUser({ email, password }, history) {
+  console.log('at actions');
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signin`, fields).then((response) => {
-      const userInfo = { username: response.data.username, email: response.data.email };
-      dispatch({ type: ActionTypes.AUTH_USER, payload: userInfo });
+    console.log('AFTER DISPATCH');
+    axios.post(`${ROOT_URL}/api/signin`, { email, password }).then((response) => {
+      // const userInfo = { username: response.data.username, password: response.data.password };
+      dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('username', response.data.username);
+      // localStorage.setItem('username', response.data.username);
       history.push('/');
     }).catch((error) => {
-      dispatch(authError(`Sign In Failed: ${error.response.data}`, error.response.status));
-      setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      console.log('theres an error');
+      dispatch({ type: ActionTypes.AUTH_USER, payload: error });
+      // setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+    });
+  };
+}
+export function signupUser({ email, password, username }, history) {
+  console.log('at SignupUser');
+  console.log({ email, password, username });
+  console.log('persons info printed above');
+  // takes in an object with email and password (minimal user object)
+  // returns a thunk method that takes dispatch as an argument (just like our create post method really)
+  return (dispatch) => {
+    // does an axios.post on the /signup endpoint (only difference from above)
+    axios.post(`${ROOT_URL}/signup`, { email, password, username }).then((response) => {
+      // on success does:
+      //  dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER });
+      //  localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.token);
+      history.push('/');
+    }).catch((error) => {
+      // on error should dispatch(authError(`Sign Up Failed: ${error.response.data}`));
+      dispatch(authError(`Sign Up Failed: ${error.response.data}`));
     });
   };
 }
 
-
-export function signupUser(fields, history) {
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup`, fields).then((response) => {
-      const userInfo = { username: response.data.username, email: response.data.email };
-      dispatch({ type: ActionTypes.AUTH_USER, payload: userInfo });
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('username', response.data.username);
-      localStorage.setItem('email', response.data.email);
-      history.push('/');
-    }).catch((error) => {
-      dispatch(authError(`Sign Up Failed: ${error.response.data}`, error.response.status));
-      setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
-    });
-  };
-}
+// export function signupUser(fields, history) {
+//   console.log('got to  actions');
+//   return (dispatch) => {
+//     axios.post(`${ROOT_URL}/signup`, fields).then((response) => {
+//       const userInfo = { username: response.data.username, email: response.data.email };
+//       dispatch({ type: ActionTypes.AUTH_USER, payload: userInfo });
+//       localStorage.setItem('token', response.data.token);
+//       localStorage.setItem('username', response.data.username);
+//       localStorage.setItem('email', response.data.email);
+//       history.push('/');
+//     }).catch((error) => {
+//       console.log('sign up failed');
+//       dispatch(authError(`Sign Up Failed: ${error.response.data}`, error.response.status));
+//       setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+//     });
+//   };
+// }
 
 
 // deletes token from localstorage
