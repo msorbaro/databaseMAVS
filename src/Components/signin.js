@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { signinUser } from '../actions';
 import graphic from '../img/graphic.png';
+import './signin.scss';
 
 class SignIn extends Component {
   constructor(props) {
@@ -43,21 +44,29 @@ class SignIn extends Component {
   render() {
     return (
       <div className="sign-in-up-page">
-        <div className="split-left">
+        <div className="content">
           <div className="left-inputs">
             <img className="graphic" src={graphic} alt="Graphic" />
-            <h1>Bread Box</h1>
-            <h2>Recommendations and reviews of jobs from our Dartmouth community.</h2>
+            <h1 important="loginH1">Bread Box</h1>
+            <h2 className="loginText">Recommendations and reviews of jobs from our Dartmouth community.</h2>
           </div>
-        </div>
-        <div className="split-right">
+
+          {/* <div className="right-div"> */}
           <div className="right-inputs">
-            <p className="sign-in-text">Sign In:</p>
-            <input className="login-text-box" onChange={this.onEmailChange} placeholder="Enter Email" />
-            <input className="login-text-box" onChange={this.onPasswordChange} placeholder="Enter Password" />
-            <button className="login-button" type="submit" onClick={this.onSubmit}>Finish</button>
+            <p className="sign-in-text">Sign in with your email:</p>
+            <div className="text-boxes">
+              <input className="login-text-box" onChange={this.onEmailChange} placeholder="Enter Email" />
+              <div />
+              <input className="login-text-box" onChange={this.onPasswordChange} placeholder="Enter Password" />
+
+            </div>
+            <button className="login-button" type="submit" onClick={this.onSubmit}>Login</button>
             <p className="newToApp">New to Our App? <Link to="/signup" className="authlink">Sign Up!</Link></p>
           </div>
+
+          {/* </div> */}
+
+
         </div>
 
       </div>

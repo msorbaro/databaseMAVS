@@ -94,14 +94,14 @@ a:hover {
 }
 
 
-.login-text-box {
+/* .login-text-box {
   font-family: "Avenir Next", sans-serif;
   outline: none;
   font-size: 20px;
   color: $dark-blue;
-}
+} */
 
-.sign-in-up-page {
+/* .sign-in-up-page {
   display:  flex; 
 }
 .split-left{
@@ -116,14 +116,14 @@ a:hover {
 .split-right{
   /* width: 50%; 
   height: 100%;  */
-  background-color: $white-color;
-}
+  /* background-color: $white-color;
+} */
 
-.right-inputs {
+/* .right-inputs {
   margin: 0; 
   background-color: $medium-blue;
   padding: 2em; 
-}
+} */ 
 
 /* .sign-in-text{
   height:  50%; 
@@ -133,11 +133,11 @@ a:hover {
   width:  50%; 
 
 } */
-.graphic  {
+/* .graphic  {
   padding: 1em; 
   width: 80%;
 }
 
 .login-button {
   padding: 10px;
-}
+} */

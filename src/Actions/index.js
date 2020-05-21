@@ -56,7 +56,7 @@ export function signinUser({ email, password }, history) {
   return (dispatch) => {
     console.log('AFTER DISPATCH');
     console.log((ROOT_URL));
-    axios.post(`${ROOT_URL}api/signin`, { email, password }).then((response) => {
+    axios.put(`${ROOT_URL}api/signin`, { email, password }).then((response) => {
       // const userInfo = { username: response.data.username, password: response.data.password };
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
