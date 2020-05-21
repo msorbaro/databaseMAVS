@@ -1,0 +1,110 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$white-color: #FCFDFF;
+
+body,html {
+    overflow: hidden; 
+}
+// .sign-in-up-page {
+//     // margin: auto;
+//     overflow: hidden;
+// }
+
+.content {
+    // position: absolute;
+    // text-align: center;
+    .left-inputs {
+        // display: flex;
+        // justify-content: space-around;
+        float:left;
+        background-color: $white-color;
+        text-align: center;
+        width: 50%;
+        // border: 1px  solid red;
+
+        // !loginH1 {
+        //     display: flex;
+        //     text-align: center;
+        //     // margin: auto; 
+        // }
+        .loginText{
+            // display: flex;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            
+        }
+
+        .graphic {
+            width: 90%;  
+        }
+    }
+
+    // .right-div {
+    //     // display: flex; 
+    // }
+
+    .right-inputs {
+        // display:  flex; 
+        text-align: center;
+        background-color: $medium-blue; 
+        padding: 1em  0em;
+        overflow: hidden;
+        margin: 2em;
+        top: 50%;
+        // margin-left: auto;
+        // margin-right: auto;
+
+        .sign-in-text {
+            // height:  50%; 
+            font-weight: 500;
+            color: $dark-blue;
+            padding: 0.5em;
+            margin: 0;
+
+        }
+        .text-boxes {
+            display: block;
+            text-align: center;
+        }
+        .login-text-box {
+            font-family: "Avenir Next", sans-serif;
+            // display: inline-block;
+            outline: none;
+            font-size: 20px;
+            padding: 0.5em 1em;
+            color: $dark-blue;
+
+        }
+        .login-button {
+            // display: flex; 
+            font-family: "Avenir Next", sans-serif;
+            font-size: 20px;
+            padding: 0.5em 5em;
+            margin: 0.5em;
+            background-color: $light-blue;
+            color: $dark-blue;
+            border-radius: 1em;
+            border: 0.5px  solid $dark-blue;
+            outline: none;
+
+        }
+        .login-button:hover {
+            outline: none;
+            background-color: $dark-blue;
+            color: $light-blue;
+            border: 0.5px  solid $light-blue;
+            cursor: pointer;
+
+        }
+
+        .newToApp {
+            padding: 0; 
+            margin:0;
+        }
+
+    }
+}
+
