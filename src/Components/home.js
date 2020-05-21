@@ -1,9 +1,12 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 // eslint-disable-next-line import/no-unresolved
 import '../style.css';
 import logo from '../img/logo.png';
+import { fetchCompanies } from '../Actions';
+
 
 class HomePage extends Component {
   constructor(props) {
@@ -51,6 +54,7 @@ class HomePage extends Component {
   }
 
   render() {
+    this.props.fetchCompanies();
     const { text } = this.state;
     return (
       <div className="homeInput">
@@ -64,4 +68,4 @@ class HomePage extends Component {
   }
 }
 
-export default withRouter(connect(null)(HomePage));
+export default withRouter(connect(null, { fetchCompanies })(HomePage));
