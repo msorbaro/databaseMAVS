@@ -10,6 +10,7 @@ export const ActionTypes = {
   FETCH_COMPANIES: 'FETCH_COMPANIES',
   FETCH_USER: 'FETCH_USER',
   AUTH_USER: 'AUTH_USER',
+  DEAUTH_USER: 'DEAUTH_USER',
 
 };
 // example function where we are getting companies
@@ -19,11 +20,11 @@ export function fetchCompanies() {
     console.log( `${ROOT_URL}/api/companies`);
     console.log("myurl^")
     axios.get(`${ROOT_URL}/api/companies/`).then((response) => {
-      console.log(response.data);
+    //  console.log(response.data);
       console.log("I GOT A RESPONSE!!!")
       dispatch({
         type: ActionTypes.FETCH_COMPANIES,
-        payload: response.data,
+        payload: response.data.response,
       });
     }).catch((error) => {
       dispatch({ type: ActionTypes.ERROR, payload: { error: error.message } });
@@ -104,25 +105,6 @@ export function signupUser({ email, password, username }, history) {
   };
 }
 
-// export function signupUser(fields, history) {
-//   console.log('got to  actions');
-//   return (dispatch) => {
-//     axios.post(`${ROOT_URL}/signup`, fields).then((response) => {
-//       const userInfo = { username: response.data.username, email: response.data.email };
-//       dispatch({ type: ActionTypes.AUTH_USER, payload: userInfo });
-//       localStorage.setItem('token', response.data.token);
-//       localStorage.setItem('username', response.data.username);
-//       localStorage.setItem('email', response.data.email);
-//       history.push('/');
-//     }).catch((error) => {
-//       console.log('sign up failed');
-//       dispatch(authError(`Sign Up Failed: ${error.response.data}`, error.response.status));
-//       setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
-//     });
-//   };
-// }
-
-
 // deletes token from localstorage
 // and deauths
 export function signoutUser(history) {
@@ -130,6 +112,7 @@ export function signoutUser(history) {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     localStorage.removeItem('email');
+    console.log("sgning out")
     dispatch({ type: ActionTypes.DEAUTH_USER });
     history.push('/');
   };

@@ -4,6 +4,8 @@ import { ActionTypes } from '../actions';
 const initialState = { authenticated: false, username: {}, email: {} };
 
 const authReducer = (state = initialState, action) => {
+  console.log(action.type);
+  console.log('this is the action type ^');
   switch (action.type) {
     case ActionTypes.AUTH_USER:
       return { ...state, authenticated: true };
