@@ -1,0 +1,68 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$white-color: #FCFDFF;
+
+.content {
+  padding-top: 30px;
+}
+
+.left {
+    float:left;
+    background-color: $white-color;
+    width: 50%;
+    padding-left: 60px;
+  }
+
+.title {
+    font-family: Avenir Next;
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 68px;
+    color: $dark-blue;
+  }
+.subtitle {
+  font-family: Avenir Next;
+  font-size: 20px;
+  line-height: 27px;
+  color: $dark-blue;
+  padding-top: 10px;
+}
+
+.boxes {
+  display: grid;
+  grid-template-columns: 230px 230px;
+  column-gap: 30px;
+  padding-top: 20px;
+}
+.box {
+  background: $medium-blue;
+  height: 130px;
+}
+.numbers {
+  font-family: Avenir Next;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 68px;
+  text-align: center;
+  color: $dark-blue;
+}
+.description {
+  font-family: Avenir Next;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 27px;
+  text-align: center;
+  color: $dark-blue;
+}
+.reviews {
+  display: grid;
+  row-gap: 10px;
+  padding-top: 10px;
+}
+.review{
+  background: rgba(204, 224, 255, 0.3);
+  width: 640px;
+  height: 112px;
+}
