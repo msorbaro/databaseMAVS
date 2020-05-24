@@ -21,15 +21,28 @@ class HomePage extends Component {
     this.state = {
       companies: [],
       text: '',
+     loaded: false,
     };
   }
 
+  componentDidMount() {
+    this.props.fetchCompanies(() => {
+      this.setState({ loaded: true });
+    });
+  }
+
   onTextChanged = (e) => {
+    var items = [];
+    for (var i = 0; i< this.props.allCompanies.length; i++){
+      items.push(this.props.allCompanies[i].CompanyName);
+    }
+    // console.log(items);
+    // console.log("^^ items")
     const { value } = e.target;
     let companies = [];
     if (value.length > 0) {
       const regex = new RegExp(`^${value}`, 'i');
-      companies = this.items.sort().filter((v) => regex.test(v));
+      companies = items.sort().filter((v) => regex.test(v));
     }
     this.setState(() => ({ companies, text: value }));
   }
@@ -54,7 +67,11 @@ class HomePage extends Component {
   }
 
   render() {
-    this.props.fetchCompanies();
+    //this.props.fetchCompanies();
+
+
+
+  //  console.log(this.props.allCompanies)
     const { text } = this.state;
     return (
       <div className="homeInput">
@@ -68,4 +85,8 @@ class HomePage extends Component {
   }
 }
 
-export default withRouter(connect(null, { fetchCompanies })(HomePage));
+function mapStateToProps(state) {
+  return { allCompanies: state.company.allCompanies };
+}
+
+export default withRouter(connect(mapStateToProps, { fetchCompanies })(HomePage));

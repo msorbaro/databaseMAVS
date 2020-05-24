@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import './style.scss';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import App from './app';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -13,8 +13,8 @@ import SignIn from './Components/signin';
 import SignUp from './Components/signup';
 import Company from './Components/companies';
 import reducers from './reducers';
-import logo from './img/logo.png';
 import { ActionTypes } from './actions';
+import Nav from './Components/navbar';
 
 // const App = () => (<div className="test">All the REACT are belong to us!</div>);
 
@@ -28,20 +28,6 @@ import { ActionTypes } from './actions';
 // const Company = (props) => {
 //   return <div> this is company: {props.match.params.id} </div>;
 // };
-
-
-const Nav = (props) => {
-  return (
-    <nav className="navBar">
-      <ul>
-        <li className="navElement"><NavLink to="/"><img className="logoAnchor" src={logo} alt="BreadBoxlogo" /></NavLink></li>
-        <li className="navElement"><NavLink to="/">Home</NavLink></li>
-        <li className="navElement"><NavLink to="/profile">Profile</NavLink></li>
-        <li className="navElement"><NavLink to="/company/google">test company </NavLink></li>
-      </ul>
-    </nav>
-  );
-};
 
 const App = (props) => {
   return (
@@ -65,8 +51,9 @@ const store = createStore(reducers, {}, compose(
 ));
 
 const token = localStorage.getItem('token');
+const email = localStorage.getItem('email');
 if (token) {
-  store.dispatch({ type: ActionTypes.AUTH_USER });
+  store.dispatch({ type: ActionTypes.AUTH_USER, email });
 }
 
 // we now wrap App in a Provider
