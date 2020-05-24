@@ -1,0 +1,99 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$white-color: #FCFDFF;
+
+
+.login-text-box {
+    font-family: "Avenir Next", sans-serif;
+    outline: none;
+    font-size: 20px;
+    padding: 0.5em 1em;
+    color: $dark-blue;
+    margin: 0.5em  0.5em;
+
+}
+
+.signup-form {
+    padding: 0;
+    margin: 0;
+}
+.sign-up-page {
+    justify-content: center;
+    text-align: center;
+    background-color: $medium-blue;
+    margin: auto;
+    padding: 1em;
+    width: 30%;
+    border: 5px solid $white-color;
+}
+.sign-up-text  {
+    justify-content: center;
+    color: $dark-blue;
+    font-weight: 500;
+}
+
+.login-button {
+    font-family: "Avenir Next", sans-serif;
+    font-size: 20px;
+    padding: 0.5em 5em;
+    margin: 0.5em;
+    background-color: $light-blue;
+    color: $dark-blue;
+    border-radius: 1em;
+    border: 0.5px  solid $dark-blue;
+    outline: none;
+}
+.login-button:hover {
+    outline: none;
+    background-color: $dark-blue;
+    color: $light-blue;
+    border: 0.5px  solid $light-blue;
+    cursor: pointer;
+
+}
+
+@media screen and (max-width: 850px) {
+    // .sign-up-page {
+    //     background-color:red; 
+    // }
+    .sign-up-page {
+        justify-content: center;
+        text-align: center;
+        background-color: $medium-blue;
+        margin: auto;
+        padding: 1em;
+        width: 40%;
+        border: 5px solid $white-color;
+    }
+    .login-text-box {
+        font-family: "Avenir Next", sans-serif;
+        outline: none;
+        font-size: 15px;
+        padding: 0.5em 0.5em;
+        color: $dark-blue;
+        margin: 0.5em  0.5em;
+    }
+    .login-button {
+        font-family: "Avenir Next", sans-serif;
+        font-size: 20px;
+        padding: 0.5em 2em;
+        margin: 0.5em;
+        background-color: $light-blue;
+        color: $dark-blue;
+        border-radius: 1em;
+        border: 0.5px  solid $dark-blue;
+        outline: none;
+    }
+    .login-button:hover {
+        outline: none;
+        background-color: $dark-blue;
+        color: $light-blue;
+        border: 0.5px  solid $light-blue;
+        cursor: pointer;
+    
+    }
+
+   
+}

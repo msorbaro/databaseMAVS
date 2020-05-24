@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { signupUser } from '../actions';
+import './signup.scss';
 
 class SignUp extends Component {
   constructor(props) {
@@ -58,9 +59,9 @@ class SignUp extends Component {
 
     render() {
       return (
-        <div className="sign-in-up-page">
-          <div className="signin-form">
-            <p>Sign Up:</p>
+        <div className="sign-up-page">
+          <div className="signup-form">
+            <p className ="sign-up-text">Sign Up:</p>
             <input className="login-text-box" onChange={this.onEmailChange} placeholder="Enter Email" />
             <input className="login-text-box" onChange={this.onPasswordChange} placeholder="Enter Password" />
             <input className="login-text-box" onChange={this.firstnameChange} placeholder="Enter Firstname" />

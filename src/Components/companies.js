@@ -58,11 +58,11 @@ class Company extends Component {
           </div>
 
           <div className="boxes">
-            <div className="box">
+            <div className="box" id="box1">
               <div className="numbers">
                 10
               </div>
-              <div className="description">
+              <div className="description" id="box2">
                 Said it was good
               </div>
             </div>
@@ -75,7 +75,7 @@ class Company extends Component {
               </div>
             </div>
           </div>
-          <p>positions previously offered</p>
+          <p className="prev-positions">Positions Previously Offered</p>
           {positionJSX}
         </div>
 
