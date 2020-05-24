@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchUser, editUser } from '../Actions';
+import './profile.scss';
 
 
 class Profile extends Component {
@@ -66,13 +67,13 @@ class Profile extends Component {
     // console.log(this.props.user);
     if (!this.state.editMode) {
       return (
-        <div>
-          <p> this is the profile page </p>
-          <p> My name is {this.props.user.firstname} and my last name is {this.props.user.lastname} </p>
-          <p> My grad yearis {this.props.user.gradYear} </p>
-          <p> My major is {this.props.user.major} </p>
-          <p> Contact me at {this.props.user.email} </p>
-          <button type="button" onClick={this.tryMe}> edit</button>
+        <div className="profile-info">
+          <h1 className="welcome"> Welcome to your profile, {this.props.user.firstname}! </h1>
+          <h2> Name: {this.props.user.firstname} {this.props.user.lastname} </h2>
+          <h2> Year of Graduation: {this.props.user.gradYear} </h2>
+          <h2> Declared Major: {this.props.user.major} </h2>
+          <h2> Contact Information: {this.props.user.email} </h2>
+          <button className="edit" type="button" onClick={this.tryMe}> Edit Information</button>
         </div>
       );
     } else {

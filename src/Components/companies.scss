@@ -28,6 +28,7 @@ $white-color: #FCFDFF;
   line-height: 27px;
   color: $dark-blue;
   padding-top: 10px;
+  font-weight: 500;
 }
 
 .boxes {
@@ -58,11 +59,58 @@ $white-color: #FCFDFF;
 }
 .reviews {
   display: grid;
-  row-gap: 10px;
-  padding-top: 10px;
+  row-gap: 0.5em;
+  padding-top: 1em;
+  margin-right: 1em;
 }
 .review{
   background: rgba(204, 224, 255, 0.3);
-  width: 640px;
+  // width: 640px;
   height: 112px;
+  padding: 1em;
+  color: $dark-blue;
 }
+
+.prev-positions {
+  color: $dark-blue;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .review {
+    width: 90%;
+  }
+  .boxes {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    column-gap: 20px;
+    row-gap: 1em;
+    padding-top: 10px;
+  }
+
+  #box1 {
+    grid-column: 1/2;
+    grid-row: 2;
+
+  }
+
+  #box2 {
+    grid-column: 1/2;
+    grid-row: 2; 
+
+  }
+
+  .numbers {
+    font-size: 40px;
+  }
+  .description {
+    font-size:15px;  
+  }
+
+ 
+}
+
+

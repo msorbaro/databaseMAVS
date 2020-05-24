@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './companies.scss';
 import {  addCompany } from '../Actions';
+import './addCompany.scss';
 
 
 class AddCompany extends Component {
