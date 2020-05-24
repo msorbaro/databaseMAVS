@@ -11,6 +11,8 @@ export const ActionTypes = {
   FETCH_USER: 'FETCH_USER',
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
+  CLEAR_ERROR: 'CLEAR_ERROR',
+
 
 };
 // example function where we are getting companies
@@ -34,10 +36,33 @@ export function fetchCompanies() {
 }
 
 // example function to get the current user
-export function fetchUser(username) {
+export function fetchUser(email) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/user/${username}`, { headers: { authorization: localStorage.getItem('token') } }).then((res) => {
-      dispatch({ type: ActionTypes.FETCH_USER, payload: res.data });
+    console.log("here + email below")
+    console.log(email)
+    axios.get(`${ROOT_URL}/api/users/${email}`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_USER, payload: res.data.response[0] });
+      console.log("in axios, this is what is back from db");
+      console.log(res.data.response[0]);
+      console.log("***")
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function editUser(fields, email) {
+  return (dispatch)=> {
+    console.log("in edit user");
+    axios.patch(`${ROOT_URL}/api/users/${email}`, fields).then((res) => {
+      console.log("dispatching at edit user!")
+      console.log(res.data)
+      dispatch({ type: ActionTypes.FETCH_USER, payload: fields });
+      //console.log("in axios, this is what is back from db");
+      //console.log(res.data.response[0]);
+    //  console.log("***")
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -59,15 +84,17 @@ export function authError(error, code) {
   };
 }
 
-export function signinUser({ email, password }, history) {
+export function signinUser(user, history) {
   console.log('at actions');
   return (dispatch) => {
     console.log('AFTER DISPATCH');
     console.log((`${ROOT_URL}/api/signin`));
-    axios.put(`${ROOT_URL}/api/signin`, { email, password }).then((response) => {
+    axios.put(`${ROOT_URL}/api/signin`, user).then((response) => {
       // const userInfo = { username: response.data.username, password: response.data.password };
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, email: user.email });
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('email', user.email);
+
       // localStorage.setItem('username', response.data.username);
       history.push('/');
     }).catch((error) => {
@@ -77,12 +104,12 @@ export function signinUser({ email, password }, history) {
     });
   };
 }
-export function signupUser({ email, password, username }, history) {
+export function signupUser(user, history) {
   console.log(`${ROOT_URL}/api/signup`)
   console.log("Tryina hithere")
 
   console.log('at SignupUser');
-  console.log({ email, password, username });
+  console.log(user);
   console.log('persons info printed above');
   // takes in an object with email and password (minimal user object)
 
@@ -91,12 +118,18 @@ export function signupUser({ email, password, username }, history) {
     // does an axios.post on the /signup endpoint (only difference from above)
     console.log("AFTER DISPLATCE")
 
-    axios.post(`${ROOT_URL}/api/signup`, { email, password, username }).then((response) => {
+    axios.post(`${ROOT_URL}/api/signup`, user).then((response) => {
       // on success does:
       //  dispatch({ type: ActionTypes.AUTH_USER });
-      dispatch({ type: ActionTypes.AUTH_USER });
+      console.log(response);
+      console.log('this is the response');
+      dispatch({ type: ActionTypes.AUTH_USER, firstname: user.firstname, email: user.email});
       //  localStorage.setItem('token', response.data.token);
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('email', user.email);
+      localStorage.setItem('firstname', user.firstname);
+
+
       history.push('/');
     }).catch((error) => {
       // on error should dispatch(authError(`Sign Up Failed: ${error.response.data}`));
@@ -110,7 +143,7 @@ export function signupUser({ email, password, username }, history) {
 export function signoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    localStorage.removeItem('firstname');
     localStorage.removeItem('email');
     console.log("sgning out")
     dispatch({ type: ActionTypes.DEAUTH_USER });
