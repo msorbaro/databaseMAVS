@@ -3,6 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signoutUser } from '../Actions';
 import logo from '../img/logo.png';
+import './navbar.scss';
 
 const Nav = (props) => {
   console.log(props.authenticated);
@@ -14,7 +15,7 @@ const Nav = (props) => {
           <li className="navElement"><NavLink to="/"><img className="logoAnchor" src={logo} alt="BreadBoxlogo" /></NavLink></li>
           <li className="navElement"><NavLink to="/">Home</NavLink></li>
           <li className="navElement"><NavLink to="/profile">Profile</NavLink></li>
-          <li className="navElement"><NavLink to="/" onClick={() => props.signoutUser(props.history)}>Sign Out</NavLink></li>
+          <li id="sign-out-nav" className="navElement"><NavLink to="/" onClick={() => props.signoutUser(props.history)}>Sign Out</NavLink></li>
         </ul>
       </nav>
     );
