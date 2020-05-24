@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-unresolved
 import '../style.css';
 import logo from '../img/logo.png';
@@ -33,8 +33,10 @@ class HomePage extends Component {
 
   onTextChanged = (e) => {
     var items = [];
-    for (var i = 0; i< this.props.allCompanies.length; i++){
-      items.push(this.props.allCompanies[i].CompanyName);
+    if(this.props.allCompanies!=null){
+      for (var i = 0; i< this.props.allCompanies.length; i++){
+        items.push(this.props.allCompanies[i].CompanyName);
+      }
     }
     // console.log(items);
     // console.log("^^ items")
@@ -56,12 +58,15 @@ class HomePage extends Component {
 
   renderCompanies() {
     const { companies } = this.state;
-    if (companies.length === 0) {
+    if (companies.length === 0 && this.state.text != '') {
+      return <li className="dropDown"><Link to={`/addCompany`}>Add a Company</Link></li>;
+    }
+    else if(companies.length ===0){
       return null;
     }
     return (
       <ul className="CompaniesList">
-        {companies.map((item) => <li className="dropDown" onClick={() => this.companySelected(item)}>{item}</li>)}
+        {companies.map((item) => <li className="dropDown"><Link to={`/company/${item}`}>{item}</Link></li>)}
       </ul>
     );
   }
