@@ -12,8 +12,8 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   CLEAR_ERROR: 'CLEAR_ERROR',
-
-
+  FETCH_COMPANY: 'FETCH_COMPANY',
+  FETCH_COMPANY_POSITIONS: 'FETCH_COMPANY_POSITIONS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -32,6 +32,42 @@ export function fetchCompanies() {
       dispatch({ type: ActionTypes.ERROR, payload: { error: error.message } });
       setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
     });
+  };
+}
+
+export function fetchCompany(name) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/${name}/info`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_COMPANY, payload: res.data.response[0] });
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchCompanyPositions(name) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/${name}/positions`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_COMPANY_POSITIONS, payload: res.data.response });
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function addCompany(fields) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/api/companies`, fields).then((res) => {
+      history.push('/')
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
   };
 }
 

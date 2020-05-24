@@ -14,7 +14,6 @@ const Nav = (props) => {
           <li className="navElement"><NavLink to="/"><img className="logoAnchor" src={logo} alt="BreadBoxlogo" /></NavLink></li>
           <li className="navElement"><NavLink to="/">Home</NavLink></li>
           <li className="navElement"><NavLink to="/profile">Profile</NavLink></li>
-          <li className="navElement"><NavLink to="/company/google">test company </NavLink></li>
           <li className="navElement"><NavLink to="/" onClick={() => props.signoutUser(props.history)}>Sign Out</NavLink></li>
         </ul>
       </nav>

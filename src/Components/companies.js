@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './companies.scss';
+import { fetchCompany, fetchCompanyPositions } from '../Actions';
+
 
 class Company extends Component {
   constructor(props) {
@@ -24,7 +26,26 @@ class Company extends Component {
   //   }
   // }
 
+  componentDidMount() {
+    this.props.fetchCompany(this.props.match.params.id);
+    this.props.fetchCompanyPositions(this.props.match.params.id)
+  }
+
   render() {
+    var positions = new Set();
+    if(this.props.specificCompanyPositions != null){
+      for (var item in this.props.specificCompanyPositions){
+        positions.add(this.props.specificCompanyPositions[item].PositionTitle);
+      }
+    }
+
+    console.log(Array.from(positions))
+    var positionJSX = Array.from(positions).map((word)=> {
+      return(
+        <p>{word}</p>
+      )
+    })
+
     return (
       <div className="content">
         <div className="left">
@@ -33,7 +54,7 @@ class Company extends Component {
             {this.props.match.params.id}
           </div>
           <div className="subtitle">
-            Size: insert, Field: insert
+            Size: {this.props.specificCompany.CompanySize}, Field: {this.props.specificCompany.CompanyField}
           </div>
 
           <div className="boxes">
@@ -54,6 +75,8 @@ class Company extends Component {
               </div>
             </div>
           </div>
+          <p>positions previously offered</p>
+          {positionJSX}
         </div>
 
         <div>
@@ -75,4 +98,9 @@ class Company extends Component {
   }
 }
 
-export default withRouter(connect(null)(Company));
+function mapStateToProps(state) {
+  return { specificCompany: state.company.specificCompany,
+  specificCompanyPositions: state.company.specificCompanyPositions };
+}
+
+export default withRouter(connect(mapStateToProps, {fetchCompany, fetchCompanyPositions})(Company));
