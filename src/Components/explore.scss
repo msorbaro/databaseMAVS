@@ -10,11 +10,11 @@ $very-light-blue: #F0F6FF;
 }
 
 .explore-rating{
-    // display: flex;
+    display: flex;
     // border: 1px solid red;
     background-color:  $very-light-blue;
     margin: 1em;
-    padding:  1em;
+    // padding:  1em;
 }
 
 .explore-rating:hover{
@@ -30,12 +30,14 @@ $very-light-blue: #F0F6FF;
 }
 
 .star-rating {
-    padding: 0em 1em;
+    margin: 1em;
 }
 
 .explore-company-name  {
     font-weight: 600;
     font-size: 23px;
+    padding: 0em;
+    margin: 1em;
 }
 
 .explore-header {
