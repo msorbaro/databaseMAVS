@@ -1,0 +1,45 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$dark-grey: #515151;
+$white-color: #FCFDFF;
+$very-light-blue: #F0F6FF;
+
+html, body{
+    height: 100%;
+    overflow: visible; 
+}
+
+.bottom {
+    margin: 0  0.5em;
+}
+.top {
+    margin: 0 0.5em;
+
+}
+.review-info {
+    background-color: $very-light-blue;
+    color: $dark-blue;
+}
+
+.review-top {
+    display: flex; 
+    margin: 1em 1em;
+    color: $dark-grey;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.review-body {
+    margin: 1em;
+    font-size: 12px;
+
+}
+
+.review-bottom {
+    display: flex; 
+    margin: 0.5em 0.5em;
+    color: $dark-grey;
+    font-size: 12px;
+}

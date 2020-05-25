@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {  addReview } from '../Actions';
+import './addReview.scss';
 
 
 class AddReview extends Component {
@@ -64,27 +65,27 @@ class AddReview extends Component {
 
   render() {
     return (
-      <div className="content" style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-        <p> add a company </p>
-        <p> company name {this.props.match.params.id}</p>
-        <p> position Title </p>
-        <input className="login-text-box" onChange={this.positionChange} value={this.state.position} />
-        <p> term </p>
-        <input className="login-text-box" onChange={this.termChange} value={this.state.term} />
-        <p> year </p>
-        <input className="login-text-box" onChange={this.yearChange} value={this.state.year} />
-        <p> city </p>
-        <input className="login-text-box" onChange={this.cityChange} value={this.state.city} />
-        <p> state </p>
-        <input className="login-text-box" onChange={this.stateChange} value={this.state.state} />
-        <p> rating </p>
-        <input className="login-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} />
-        <p> comment </p>
-        <input className="login-text-box" onChange={this.commentChange} value={this.state.comment} />
-        <p> anonymous (this needs to be 1 or 0)</p>
-        <input className="login-text-box" type="number" onChange={this.anonymousChange} value={this.state.anonymous} />
-
-        <button type="button" onClick={this.submit}> submit </button>
+      <div>
+        <h1 className= "add-a-review"> Add a review for {this.props.match.params.id}</h1>
+        <div className="review-content">
+          <p className= "review-input-name"> Position Title: </p>
+          <input className="review-text-box" onChange={this.positionChange} value={this.state.position} />
+          <p className= "review-input-name"> Term: </p>
+          <input className="review-text-box" onChange={this.termChange} value={this.state.term} />
+          <p className= "review-input-name"> Year: </p>
+          <input className="review-text-box" onChange={this.yearChange} value={this.state.year} />
+          <p className= "review-input-name"> City: </p>
+          <input className="review-text-box" onChange={this.cityChange} value={this.state.city} />
+          <p className= "review-input-name"> State: </p>
+          <input className="review-text-box" onChange={this.stateChange} value={this.state.state} />
+          <p className= "review-input-name"> Rating: </p>
+          <input className="review-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} />
+          <p className= "review-input-name"> Comment: </p>
+          <input className="review-text-box" onChange={this.commentChange} value={this.state.comment} />
+          <p className= "review-input-name"> Would you like to be Anonymous? (1 = Yes and 0 = No)</p>
+          <input className="review-text-box" type="number" onChange={this.anonymousChange} value={this.state.anonymous} />
+          <button className="submit-review" type="button" onClick={this.submit}> Submit </button>
+        </div>
       </div>
     );
   }
