@@ -33,7 +33,7 @@ class AddCompany extends Component {
       size: this.state.size,
       field: this.state.field,
     }
-    this.props.addCompany(fields);
+    this.props.addCompany(fields, this.props.history);
   }
 
   render() {
