@@ -179,6 +179,14 @@ export function fetchUser(email) {
   };
 }
 
+export function deleteReview(id, history, whereToGo) {
+  console.log("here in general")
+  axios.delete(`${ROOT_URL}/api/reviews/${id}`).then((res) => {
+    console.log("deleted")
+    history.push('/')
+  })
+}
+
 export function fetchUserReviews(email) {
   return (dispatch) => {
     // console.log("here + email below")

@@ -22,6 +22,13 @@ class Company extends Component {
     this.props.fetchCompanyReviews(this.props.match.params.id);
   }
 
+  refresh = () => {
+    console.log("here")
+    this.props.fetchCompany(this.props.match.params.id);
+    this.props.fetchCompanyPositions(this.props.match.params.id)
+    this.props.fetchCompanyReviews(this.props.match.params.id);
+  }
+
   calculateAverageRating = () => {
     var totalReviewScore = 0;
     for (var i = 0; i < this.props.reviews.length; i++) {
@@ -108,7 +115,7 @@ class Company extends Component {
 
     var reviews = this.props.reviews.length > 0 ? this.props.reviews.map((review)=>{
     //  console.log(review)
-      return(<Review reviewInfo={review}/>)
+      return(<Review reviewInfo={review} refresh={this.refresh}/>)
     }) : null;
 
     console.log(this.props.reviews);
