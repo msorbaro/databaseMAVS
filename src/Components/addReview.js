@@ -81,7 +81,7 @@ class AddReview extends Component {
           <input className="review-text-box" onChange={this.stateChange} value={this.state.state} />
           <p className= "review-input-name"> Rating: </p>
           
-          <ReactStars count={5} onChange={this.ratingChange} value={this.state.rating} half={false} size={24} color2={'#cc8b9b'}></ReactStars>
+          <ReactStars count={5} onChange={this.ratingChange} value={this.state.rating} half={false} size={24} color2="#86B6FF"></ReactStars>
 
           {/* <input className="review-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} /> */}
           <p className= "review-input-name"> Comment: </p>

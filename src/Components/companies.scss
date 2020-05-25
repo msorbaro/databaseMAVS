@@ -4,6 +4,11 @@ $light-blue: #CCE0FF;
 $grey-color: #C4C4C4;
 $white-color: #FCFDFF;
 
+body, html {
+  height: 100%;
+  overflow: scroll;
+}
+
 .content {
   padding-top: 30px;
 }
@@ -75,6 +80,20 @@ $white-color: #FCFDFF;
   color: $dark-blue;
   font-weight: 500;
   font-size: 20px;
+}
+
+.add-review-button {
+  background-color: $light-blue;
+  color: $dark-blue;
+  padding: 0.4em;
+  border: 1px  solid  $dark-blue;
+}
+.add-review-button:hover {
+  background-color: $dark-blue;
+  color: $light-blue;
+  padding: 0.4em;
+  font-weight: 400;
+  border: 1px  solid  $light-blue;
 }
 
 @media screen and (max-width: 1000px) {

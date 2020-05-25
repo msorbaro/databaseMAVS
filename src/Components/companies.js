@@ -73,23 +73,34 @@ class Company extends Component {
       datasets: [
         {
            label: "People Hired",
-           backgroundColor: ["#3e95cd", "#3e95cd","#3e95cd","#3e95cd","#3e95cd"],
+           backgroundColor: ['rgba(134, 182, 255, 0.5)','rgba(134, 182, 255, 0.5)','rgba(134, 182, 255, 0.5)'],
            data: data,
         }
       ],
     }
     var myBarChart = <Bar
           data={chartData}
+          width={10}
+          height={5}
           options={{
             title:{
               display:true,
-              text:'People Hired Per Term',
-              fontSize:20
+              text:'Number of Dartmouth Students Hired Per Term',
+              fontSize:15,
+              fontColor: '#272C55',
+              fontFamily: "'Avenit Next', sans-serif"
             },
             legend:{
               display:false,
+              labels: {
+                defaultFontColor: '#272C55',
+              }
             },
             scales: {
+              xAxes: [{
+                barThickness: 40,  // number (pixels) or 'flex'
+                // maxBarThickness: 8 // number (pixels)
+            }],
                 yAxes: [{
                     ticks: {
                         suggestedMin: 0,
@@ -157,7 +168,7 @@ class Company extends Component {
         </div>
 
         <div>
-          <Link to={`/addReview/${this.props.match.params.id}`}>Add Review</Link>
+          <Link to={`/addReview/${this.props.match.params.id}`} className="add-review-button">Add Review</Link>
           <div className="subtitle">
             Reviews
           </div>

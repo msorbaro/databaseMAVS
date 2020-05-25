@@ -5,7 +5,7 @@ $grey-color: #C4C4C4;
 $white-color: #FCFDFF;
 
 #sign-out-nav {
-    position: absolute;
+    // position: absolute;
     right: 1em;
     display: inline;
     padding-top: 1em;
@@ -13,6 +13,7 @@ $white-color: #FCFDFF;
 }
 
 .navElement {
+    // display: block;
     display: inline;
     text-decoration: none;
     padding: 0em 0.5em;
@@ -20,6 +21,7 @@ $white-color: #FCFDFF;
 }
 
 .navBar {
+    display: block;
     background-color: $light-blue;
     padding: 0.5em;
 }

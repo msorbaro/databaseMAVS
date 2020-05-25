@@ -33,8 +33,8 @@ class Review extends Component {
 
     const buttons = this.props.reviewInfo.Email === this.props.email ? (
       <div>
-        <button type="button" onClick={this.delete}> delete </button>
-        <button type="button" onClick={this.edit}> edit </button>
+        <button className="deleteReview" type="button" onClick={this.delete}> delete </button>
+        <button className="editReview" type="button" onClick={this.edit}> edit </button>
       </div>
     ) : null;
     return (
@@ -47,12 +47,13 @@ class Review extends Component {
         </div>
         <p className="review-body"> {this.props.reviewInfo.Comment} </p>
         <div className="review-bottom">
-          <p className="bottom"> Rating: {this.props.reviewInfo.Rating} </p>
-          <ReactStars count={5} value={this.props.reviewInfo.Rating} half={false} size={15} color2="#cc8b9b" />
-
+          {buttons}
+          <p className="bottom"> Rating: </p>
+          <ReactStars edit={false} count={5} value={this.props.reviewInfo.Rating} half={false} size={15} color2="#86B6FF" />
           <p className="bottom"> review date: {this.props.reviewInfo.ReviewDate} </p>
+
         </div>
-        {buttons}
+
       </div>
     );
   }
