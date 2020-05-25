@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {  addReview } from '../Actions';
+import ReactStars from 'react-stars'
 import './addReview.scss';
 
 
@@ -36,7 +37,7 @@ class AddReview extends Component {
   }
 
   ratingChange = (event) => {
-    this.setState({ rating: event.target.value });
+    this.setState({ rating: event});
   }
 
   commentChange = (event) => {
@@ -79,7 +80,10 @@ class AddReview extends Component {
           <p className= "review-input-name"> State: </p>
           <input className="review-text-box" onChange={this.stateChange} value={this.state.state} />
           <p className= "review-input-name"> Rating: </p>
-          <input className="review-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} />
+          
+          <ReactStars count={5} onChange={this.ratingChange} value={this.state.rating} half={false} size={24} color2={'#cc8b9b'}></ReactStars>
+
+          {/* <input className="review-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} /> */}
           <p className= "review-input-name"> Comment: </p>
           <input className="review-text-box" onChange={this.commentChange} value={this.state.comment} />
           <p className= "review-input-name"> Would you like to be Anonymous? (1 = Yes and 0 = No)</p>
