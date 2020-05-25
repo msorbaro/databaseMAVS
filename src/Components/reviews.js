@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ReactStars from 'react-stars';
 import './reviews.scss';
+import { deleteReview } from '../Actions';
+
 
 class Review extends Component {
   constructor(props) {
@@ -12,9 +14,29 @@ class Review extends Component {
     };
   }
 
+  delete = () => {
+    const link = this.props.reviewInfo.CompanyName;
+    this.props.deleteReview(this.props.reviewInfo.ReviewID, this.props.history, link);
+  }
+
+  edit= () => {
+    console.log('no edit feature yet');
+  }
+
   render() {
     const name = this.props.reviewInfo.Anonymous === 1 ? 'Anonymous'
       : `${this.props.reviewInfo.FirstName} ${this.props.reviewInfo.LastName}`;
+    console.log(this.props.reviewInfo);
+
+    // console.log(this.props.reviewInfo.Email);
+
+
+    const buttons = this.props.reviewInfo.Email === this.props.email ? (
+      <div>
+        <button type="button" onClick={this.delete}> delete </button>
+        <button type="button" onClick={this.edit}> edit </button>
+      </div>
+    ) : null;
     return (
       <div className="review-info">
         <div className="review-top">
@@ -30,10 +52,14 @@ class Review extends Component {
 
           <p className="bottom"> review date: {this.props.reviewInfo.ReviewDate} </p>
         </div>
+        {buttons}
       </div>
     );
   }
 }
 
+function mapStateToProps(state) {
+  return { email: state.auth.email };
+}
 
-export default withRouter(connect(null, { })(Review));
+export default withRouter(connect(mapStateToProps, { deleteReview })(Review));

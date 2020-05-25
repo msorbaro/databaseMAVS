@@ -6,6 +6,8 @@ const initialState = {
   specificCompany: {},
   specificCompanyPositions: {},
   reviews: {},
+  allCompanyReviews: {},
+  allCompanyRatings: null,
 };
 
 
@@ -19,6 +21,12 @@ const companyReducer = (state = initialState, action) => {
       return { ...state, specificCompanyPositions: action.payload };
     case ActionTypes.FETCH_COMPANY_REVIEWS:
       return { ...state, reviews: action.payload };
+    case ActionTypes.FETCH_ALL_REVIEWS:
+      return { ...state, allCompanyReviews: action.payload };
+    case ActionTypes.FETCH_ALL_RATINGS:
+      console.log('in all ratings');
+      console.log(action.payload);
+      return { ...state, allCompanyRatings: action.payload };
     default:
       return state;
   }
