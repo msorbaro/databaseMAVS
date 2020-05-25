@@ -43,3 +43,38 @@ html, body{
     color: $dark-grey;
     font-size: 12px;
 }
+
+.editReview {
+    padding: 0.5em;
+    margin:0.5em;
+    // color: $dark-blue;
+    border: none;
+    background-color: $light-blue;
+    // background-color: Transparent;
+    // text-decoration: underline;
+
+}
+
+.deleteReview {
+    padding: 0.5em;
+    margin:0.5em;
+    // color: $dark-blue;
+    border: none;
+    background-color: $light-blue;
+    // background-color: Transparent;
+    // text-decoration: underline;
+}
+
+.editReview:hover {
+    color: $light-blue;
+    background-color: $dark-blue;
+    // background-color: Transparent;
+    cursor: pointer;
+}
+
+.deleteReview:hover {
+    color: $light-blue;
+    background-color: $dark-blue;
+    // background-color: Transparent;
+    cursor: pointer;
+}
