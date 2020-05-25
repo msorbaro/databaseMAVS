@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import ReactStars from 'react-stars';
 import './reviews.scss';
 
 class Review extends Component {
@@ -25,6 +26,8 @@ class Review extends Component {
         <p className="review-body"> {this.props.reviewInfo.Comment} </p>
         <div className="review-bottom">
           <p className="bottom"> Rating: {this.props.reviewInfo.Rating} </p>
+          <ReactStars count={5} value={this.props.reviewInfo.Rating} half={false} size={15} color2="#cc8b9b" />
+
           <p className="bottom"> review date: {this.props.reviewInfo.ReviewDate} </p>
         </div>
       </div>
