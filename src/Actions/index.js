@@ -89,8 +89,8 @@ export function addCompany(fields, history) {
 
 
 export function addReview(fields, history) {
-  // console.log(fields);
-  // console.log("made it here and these are my fields")
+   console.log(fields);
+   console.log("made it here and these are my fields")
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/review`, fields).then((res) => {
       const url = '/company/' + fields.CompanyName;

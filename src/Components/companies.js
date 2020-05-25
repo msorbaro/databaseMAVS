@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import './companies.scss';
 import Review from './reviews';
+import {Bar} from 'react-chartjs-2';
 import { fetchCompany, fetchCompanyPositions, fetchCompanyReviews } from '../Actions';
 
 
@@ -21,7 +22,76 @@ class Company extends Component {
     this.props.fetchCompanyReviews(this.props.match.params.id);
   }
 
+  calculateAverageRating = () => {
+    var totalReviewScore = 0;
+    for (var i = 0; i < this.props.reviews.length; i++) {
+      totalReviewScore = totalReviewScore + this.props.reviews[i].Rating
+    }
+    console.log(totalReviewScore);
+    return Math.round(totalReviewScore/this.props.reviews.length)
+  }
+
+  calculateTermNumPeople = () => {
+    var scoresMap = new Map();
+    for (var i =0; i< this.props.reviews.length; i++){
+      var term = this.props.reviews[i].Term;
+      var year = this.props.reviews[i].Year;
+      var label = term+year;
+
+      var currTermCount = scoresMap.has(label) ? scoresMap.get(label) + 1 : 1;
+      if(term!=null) {scoresMap.set(label, currTermCount);}
+    }
+
+    return scoresMap;
+  }
+
   render() {
+
+    var dataMap = this.calculateTermNumPeople();
+
+    var labels=[];
+    var data=[];
+
+    for(let key of dataMap.keys()){
+      labels.push(key);
+      data.push(dataMap.get(key))
+    }
+
+    // console.log(labels);
+    // console.log(data);
+
+
+    var chartData = {
+      labels: labels,
+      datasets: [
+        {
+           label: "People Hired",
+           backgroundColor: ["#3e95cd", "#3e95cd","#3e95cd","#3e95cd","#3e95cd"],
+           data: data,
+        }
+      ],
+    }
+    var myBarChart = <Bar
+          data={chartData}
+          options={{
+            title:{
+              display:true,
+              text:'People Hired Per Term',
+              fontSize:20
+            },
+            legend:{
+              display:false,
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                    }
+                }]
+            }
+          }}
+        />
+
     var positions = new Set();
     if(this.props.specificCompanyPositions != null){
       for (var item in this.props.specificCompanyPositions){
@@ -29,7 +99,7 @@ class Company extends Component {
       }
     }
 
-    console.log(Array.from(positions))
+    //console.log(Array.from(positions))
     var positionJSX = Array.from(positions).map((word)=> {
       return(
         <p>{word}</p>
@@ -37,11 +107,13 @@ class Company extends Component {
     })
 
     var reviews = this.props.reviews.length > 0 ? this.props.reviews.map((review)=>{
-      console.log(review)
+    //  console.log(review)
       return(<Review reviewInfo={review}/>)
     }) : null;
 
     console.log(this.props.reviews);
+
+    var avRating = this.props.reviews.length > 0 ? this.calculateAverageRating() : 0;
 
     return (
       <div className="content">
@@ -57,10 +129,10 @@ class Company extends Component {
           <div className="boxes">
             <div className="box" id="box1">
               <div className="numbers">
-                10
+                {avRating}
               </div>
               <div className="description" id="box2">
-                Said it was good
+                Average Rating
               </div>
             </div>
             <div className="box">
@@ -72,6 +144,7 @@ class Company extends Component {
               </div>
             </div>
           </div>
+          {myBarChart}
           <p className="prev-positions">Positions Previously Offered</p>
           {positionJSX}
         </div>
