@@ -52,6 +52,16 @@ class Company extends Component {
     return scoresMap;
   }
 
+  calculatePositionNumPeople = () => {
+    var scoresMap = new Map();
+    for (var i =0; i< this.props.reviews.length; i++){
+      var position = this.props.reviews[i].PositionTitle;
+      var currTermCount = scoresMap.has(position) ? scoresMap.get(position) + 1 : 1;
+      if(position!=null) {scoresMap.set(position, currTermCount);}
+    }
+    return scoresMap;
+  }
+
   render() {
 
     var dataMap = this.calculateTermNumPeople();
@@ -64,9 +74,13 @@ class Company extends Component {
       data.push(dataMap.get(key))
     }
 
-    // console.log(labels);
-    // console.log(data);
-
+    var positionLabels = [];
+    var positionData = [];
+    var positionMap = this.calculatePositionNumPeople();
+    for(let key of positionMap.keys()){
+      positionLabels.push(key);
+      positionData.push(positionMap.get(key))
+    }
 
     var chartData = {
       labels: labels,
@@ -78,6 +92,7 @@ class Company extends Component {
         }
       ],
     }
+
     var myBarChart = <Bar
           data={chartData}
           options={{
@@ -98,6 +113,39 @@ class Company extends Component {
             }
           }}
         />
+
+    var positionData = {
+            labels: positionLabels,
+            datasets: [
+              {
+                 label: "People Hired",
+                 backgroundColor: ["#3e95cd", "#3e95cd","#3e95cd","#3e95cd","#3e95cd"],
+                 data: positionData,
+              }
+        ],
+    }
+
+    var positionBar = <Bar
+          data={positionData}
+          options={{
+            title:{
+              display:true,
+              text:'People in Each Position',
+              fontSize:20
+            },
+            legend:{
+              display:false,
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                    }
+                }]
+            }
+          }}
+        />
+
 
     var positions = new Set();
     if(this.props.specificCompanyPositions != null){
@@ -151,6 +199,7 @@ class Company extends Component {
               </div>
             </div>
           </div>
+          {positionBar}
           {myBarChart}
           <p className="prev-positions">Positions Previously Offered</p>
           {positionJSX}
