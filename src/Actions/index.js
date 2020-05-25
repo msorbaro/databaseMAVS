@@ -18,6 +18,7 @@ export const ActionTypes = {
   FETCH_ALL_REVIEWS: 'FETCH_ALL_REVIEWS',
   FETCH_ALL_RATINGS: 'FETCH_ALL_RATINGS',
   FETCH_USER_REVIEWS: 'FETCH_USER_REVIEWS',
+  FETCH_ALL_POSITIONS: 'FETCH_ALL_POSITIONS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -121,6 +122,39 @@ export function fetchAvRating() {
       // console.log(finalMap)
 
       dispatch({ type: ActionTypes.FETCH_ALL_RATINGS, payload: finalMap });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchAllPositions() {
+  console.log("in all posisitons!*****************")
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      console.log("here in axios call")
+      let returnMap = new Map();
+      for(var i = 0; i< res.data.response.length; i+=1){
+        var company = res.data.response[i].CompanyName;
+        var position = res.data.response[i].PositionTitle;
+        if(returnMap.has(company)){
+          var currPositions = returnMap.get(company).add(position);
+          returnMap.set(company, currPositions);
+        }
+        else {
+          var newSet = new Set();
+          newSet.add(position);
+          returnMap.set(company, newSet);
+        }
+      }
+      console.log("I did all the map crap");
+      console.log(returnMap)
+
+      dispatch({ type: ActionTypes.FETCH_ALL_POSITIONS, payload: returnMap });
       // console.log("HERE");
       // console.log(res.data.response)
     })
