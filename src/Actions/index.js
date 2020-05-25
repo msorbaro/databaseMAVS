@@ -15,6 +15,9 @@ export const ActionTypes = {
   FETCH_COMPANY: 'FETCH_COMPANY',
   FETCH_COMPANY_POSITIONS: 'FETCH_COMPANY_POSITIONS',
   FETCH_COMPANY_REVIEWS: 'FETCH_COMPANY_REVIEWS',
+  FETCH_ALL_REVIEWS: 'FETCH_ALL_REVIEWS',
+  FETCH_ALL_RATINGS: 'FETCH_ALL_RATINGS',
+  FETCH_USER_REVIEWS: 'FETCH_USER_REVIEWS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -75,6 +78,59 @@ export function fetchCompanyReviews(name) {
   };
 }
 
+export function fetchAllReviews() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_ALL_REVIEWS, payload: res.data.response });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchAvRating() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      let totRatingMap = new Map();
+      let totCountMap = new Map();
+      for(var i = 0; i< res.data.response.length; i+=1){
+        var company = res.data.response[i].CompanyName;
+        if(totCountMap.has(company)){
+          var currCount = totCountMap.get(company) +1;
+          totCountMap.set(company, currCount);
+          var currrating = totRatingMap.get(company) + res.data.response[i].Rating;
+          totRatingMap.set(company, currrating);
+        }
+        else {
+          totCountMap.set(company, 1);
+          totRatingMap.set(company, res.data.response[i].Rating);
+        }
+      }
+
+      let finalMap = new Map();
+      for(let key of totRatingMap.keys()){
+        let totRating = totRatingMap.get(key);
+        let totCount = totCountMap.get(key);
+        finalMap.set(key, Math.round(totRating/totCount));
+      }
+      // console.log("I did all the map crap");
+      // console.log(finalMap)
+
+      dispatch({ type: ActionTypes.FETCH_ALL_RATINGS, payload: finalMap });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
 export function addCompany(fields, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/companies`, fields).then((res) => {
@@ -89,8 +145,8 @@ export function addCompany(fields, history) {
 
 
 export function addReview(fields, history) {
-  // console.log(fields);
-  // console.log("made it here and these are my fields")
+   console.log(fields);
+   console.log("made it here and these are my fields")
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/review`, fields).then((res) => {
       const url = '/company/' + fields.CompanyName;
@@ -115,6 +171,30 @@ export function fetchUser(email) {
       // console.log("in axios, this is what is back from db");
       // console.log(res.data.response[0]);
       // console.log("***")
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function deleteReview(id, history, whereToGo) {
+  console.log("here in general")
+  axios.delete(`${ROOT_URL}/api/reviews/${id}`).then((res) => {
+    console.log("deleted")
+    history.push('/')
+  })
+}
+
+export function fetchUserReviews(email) {
+  return (dispatch) => {
+    // console.log("here + email below")
+    // console.log(email)
+    axios.get(`${ROOT_URL}/api/users/${email}/reviews`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_USER_REVIEWS, payload: res.data.response });
+      // console.log("getting user reviews");
+      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });

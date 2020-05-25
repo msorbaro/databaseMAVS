@@ -2,8 +2,9 @@ import { ActionTypes } from '../actions';
 
 
 const initialState = {
-  firstname: '', email: '', lastname: '', major: '', gradYear: '',
+  firstname: '', email: '', lastname: '', major: '', gradYear: '', reviews: null,
 };
+
 
 const userReducer = (state = initialState, action) => {
   console.log('in user reducer');
@@ -17,6 +18,11 @@ const userReducer = (state = initialState, action) => {
         lastname: action.payload.LastName,
         major: action.payload.Major,
         gradYear: action.payload.GradYear,
+      };
+    case ActionTypes.FETCH_USER_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
       };
     default:
       return state;

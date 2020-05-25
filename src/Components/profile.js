@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchUser, editUser } from '../Actions';
+import { fetchUser, editUser, fetchUserReviews } from '../Actions';
 import './profile.scss';
+import Review from './reviews';
 
 
 class Profile extends Component {
@@ -16,6 +17,7 @@ class Profile extends Component {
 
   componentDidMount() {
     this.props.fetchUser(this.props.email);
+    this.props.fetchUserReviews(this.props.email);
   }
 
   tryMe = () => {
@@ -62,10 +64,12 @@ class Profile extends Component {
 
 
   render() {
-    // console.log('this should be email');
-    // console.log(this.props);
-    // console.log(this.props.user);
+    console.log(this.props.user.reviews);
     if (!this.state.editMode) {
+      const reviews = this.props.user.reviews != null ? this.props.user.reviews.map((review) => {
+      //  console.log(review)
+        return (<Review reviewInfo={review} />);
+      }) : null;
       return (
         <div className="profile-info">
           <h1 className="welcome"> Welcome to your profile, {this.props.user.firstname}! </h1>
@@ -74,6 +78,8 @@ class Profile extends Component {
           <h2> Declared Major: {this.props.user.major} </h2>
           <h2> Contact Information: {this.props.user.email} </h2>
           <button className="edit" type="button" onClick={this.tryMe}> Edit Information</button>
+          <p> Reviews </p>
+          {reviews}
         </div>
       );
     } else {
@@ -98,4 +104,4 @@ function mapStateToProps(state) {
   return { user: state.user, email: state.auth.email };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchUser, editUser })(Profile));
+export default withRouter(connect(mapStateToProps, { fetchUser, editUser, fetchUserReviews })(Profile));
