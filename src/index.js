@@ -14,6 +14,7 @@ import SignUp from './Components/signup';
 import Company from './Components/companies';
 import AddCompany from './Components/addCompany';
 import AddReview from './Components/addReview';
+import Explore from './Components/explore';
 
 
 import reducers from './reducers';
@@ -42,6 +43,7 @@ const App = (props) => {
         <Route path="/signup" component={SignUp} />
         <Route exact path="/" component={HomePage} />
         <Route path="/profile" component={Profile} />
+        <Route path="/explore" component={Explore} />
         <Route path="/addCompany" component={AddCompany} />
         <Route exact path="/company/:id" component={Company} />
         <Route exact path="/addReview/:id" component={AddReview} />

@@ -15,6 +15,8 @@ export const ActionTypes = {
   FETCH_COMPANY: 'FETCH_COMPANY',
   FETCH_COMPANY_POSITIONS: 'FETCH_COMPANY_POSITIONS',
   FETCH_COMPANY_REVIEWS: 'FETCH_COMPANY_REVIEWS',
+  FETCH_ALL_REVIEWS: 'FETCH_ALL_REVIEWS',
+  FETCH_ALL_RATINGS: 'FETCH_ALL_RATINGS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -65,6 +67,59 @@ export function fetchCompanyReviews(name) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/api/companies/${name}/reviews`).then((res) => {
       dispatch({ type: ActionTypes.FETCH_COMPANY_REVIEWS, payload: res.data.response });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchAllReviews() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_ALL_REVIEWS, payload: res.data.response });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchAvRating() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      let totRatingMap = new Map();
+      let totCountMap = new Map();
+      for(var i = 0; i< res.data.response.length; i+=1){
+        var company = res.data.response[i].CompanyName;
+        if(totCountMap.has(company)){
+          var currCount = totCountMap.get(company) +1;
+          totCountMap.set(company, currCount);
+          var currrating = totRatingMap.get(company) + res.data.response[i].Rating;
+          totRatingMap.set(company, currrating);
+        }
+        else {
+          totCountMap.set(company, 1);
+          totRatingMap.set(company, res.data.response[i].Rating);
+        }
+      }
+
+      let finalMap = new Map();
+      for(let key of totRatingMap.keys()){
+        let totRating = totRatingMap.get(key);
+        let totCount = totCountMap.get(key);
+        finalMap.set(key, Math.round(totRating/totCount));
+      }
+      // console.log("I did all the map crap");
+      // console.log(finalMap)
+
+      dispatch({ type: ActionTypes.FETCH_ALL_RATINGS, payload: finalMap });
       // console.log("HERE");
       // console.log(res.data.response)
     })
