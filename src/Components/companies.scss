@@ -33,7 +33,9 @@ body, html {
   line-height: 27px;
   color: $dark-blue;
   padding-top: 10px;
+  padding-right: 1em;
   font-weight: 500;
+  margin: 0.5em;
 }
 
 .boxes {
@@ -85,7 +87,7 @@ body, html {
 .add-review-button {
   background-color: $light-blue;
   color: $dark-blue;
-  padding: 0.4em;
+  padding: 0.2em;
   border: 1px  solid  $dark-blue;
 }
 .add-review-button:hover {
@@ -94,6 +96,20 @@ body, html {
   padding: 0.4em;
   font-weight: 400;
   border: 1px  solid  $light-blue;
+}
+
+.all-positions{
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.positions-tags {
+  font-family: 'Avenir Next', sans-serif;
+  font-weight: 300;
+  padding: 0.3em;
+  background-color: $dark-blue;
+  color: $light-blue;
+  margin: 0.5em;
 }
 
 @media screen and (max-width: 1000px) {
@@ -128,6 +144,7 @@ body, html {
   .description {
     font-size:15px;  
   }
+
 
  
 }

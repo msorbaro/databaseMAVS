@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import './companies.scss';
 import Review from './reviews';
-import {Bar} from 'react-chartjs-2';
+import {Bar, Doughnut} from 'react-chartjs-2';
 import { fetchCompany, fetchCompanyPositions, fetchCompanyReviews } from '../Actions';
 
 
@@ -95,8 +95,8 @@ class Company extends Component {
 
     var myBarChart = <Bar
           data={chartData}
-          width={10}
-          height={5}
+          // width={10}
+          // height={5}
           options={{
             title:{
               display:true,
@@ -111,9 +111,18 @@ class Company extends Component {
                 defaultFontColor: '#272C55',
               }
             },
+            layout: {
+              padding: {
+                left: 0,
+                right: 50,
+                top: 20,
+                bottom: 0
+            }
+
+            },
             scales: {
               xAxes: [{
-                barThickness: 40,  // number (pixels) or 'flex'
+                // barThickness: 40,  // number (pixels) or 'flex'
                 // maxBarThickness: 8 // number (pixels)
             }],
                 yAxes: [{
@@ -130,30 +139,34 @@ class Company extends Component {
             datasets: [
               {
                  label: "People Hired",
-                 backgroundColor: ["#3e95cd", "#3e95cd","#3e95cd","#3e95cd","#3e95cd"],
+                 backgroundColor: ['rgba(39, 44, 85, 1)', 'rgba(39, 44, 85, 0.9)','rgba(39, 44, 85, 0.8)','rgba(39, 44, 85, 0.7)','rgba(39, 44, 85, 0.6)','rgba(39, 44, 85, 0.5)','rgba(39, 44, 85, 0.4)','rgba(39, 44, 85, 0.3)','rgba(39, 44, 85, 0.2)','rgba(39, 44, 85, 0.1)'],
                  data: positionData,
               }
         ],
     }
 
-    var positionBar = <Bar
+    var positionBar = <Doughnut
           data={positionData}
           options={{
             title:{
               display:true,
-              text:'People in Each Position',
-              fontSize:20
+              text:'Number of Dartmouth Students by Position',
+              fontSize:15,
+              fontColor: '#272C55',
+              fontFamily: "'Avenit Next', sans-serif"
+            },
+            layout: {
+              padding: {
+                left: 0,
+                right: 0,
+                top: 20,
+                bottom: 0
+            }
+
             },
             legend:{
               display:false,
             },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        suggestedMin: 0,
-                    }
-                }]
-            }
           }}
         />
 
@@ -168,7 +181,7 @@ class Company extends Component {
     //console.log(Array.from(positions))
     var positionJSX = Array.from(positions).map((word)=> {
       return(
-        <p>{word}</p>
+        <p className="positions-tags">{word}</p>
       )
     })
 
@@ -213,14 +226,17 @@ class Company extends Component {
           {positionBar}
           {myBarChart}
           <p className="prev-positions">Positions Previously Offered</p>
+          <div className="all-positions">
           {positionJSX}
+          </div>
         </div>
 
         <div>
-          <Link to={`/addReview/${this.props.match.params.id}`} className="add-review-button">Add Review</Link>
+          
           <div className="subtitle">
             Reviews
           </div>
+          <Link to={`/addReview/${this.props.match.params.id}`} className="add-review-button">Add Review</Link>
           <div className="reviews">
           {reviews}
           </div>

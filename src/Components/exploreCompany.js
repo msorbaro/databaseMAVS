@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import './reviews.scss';
+import './explore.scss';
+import ReactStars from 'react-stars';
 
 class ExploreCompany extends Component {
   constructor(props) {
@@ -13,9 +14,9 @@ class ExploreCompany extends Component {
 
   render() {
     return (
-      <div>
-        <p>name: {this.props.name}</p>
-        <p>av rating:{this.props.rating}</p>
+      <div className="explore-rating">
+        <h2 className="explore-company-name">Company: {this.props.name}</h2>
+        <ReactStars className="star-rating" edit={false} count={5} value={this.props.rating} half={false} size={24} color2="#86B6FF" />
       </div>
     );
   }

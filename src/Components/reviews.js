@@ -38,12 +38,12 @@ class Review extends Component {
       </div>
     ) : null;
     return (
-      <div className="review-info">
+      <div id="review-info">
         <div className="review-top">
-          <p className="top"> {name} </p>
-          <p className="top"> grad year: {this.props.reviewInfo.GradYear} </p>
-          <p className="top"> major: {this.props.reviewInfo.Major} </p>
-          <p className="top"> PositionTitle: {this.props.reviewInfo.PositionTitle} </p>
+          <p className="top">{name} </p>
+          <p className="top"> YOG: {this.props.reviewInfo.GradYear} </p>
+          <p className="top"> Major: {this.props.reviewInfo.Major} </p>
+          <p className="top"> Position: {this.props.reviewInfo.PositionTitle} </p>
         </div>
         <p className="review-body"> {this.props.reviewInfo.Comment} </p>
         <div className="review-bottom">
