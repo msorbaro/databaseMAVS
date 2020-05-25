@@ -1,0 +1,52 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$white-color: #FCFDFF;
+$very-light-blue: #F0F6FF;
+
+.review-info {
+    background-color: $white-color;
+}
+
+.explore-rating{
+    // display: flex;
+    // border: 1px solid red;
+    background-color:  $very-light-blue;
+    margin: 1em;
+    padding:  1em;
+}
+
+.explore-rating:hover{
+    background-color: $light-blue;
+    cursor: pointer;  
+}
+
+.explore-blocks {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    // flex-wrap: wrap;
+    margin:  2em;
+}
+
+.star-rating {
+    padding: 0em 1em;
+}
+
+.explore-company-name  {
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.explore-header {
+    padding: 0em 1.2em;
+}
+
+select {
+    font-family: 'Avenir-Next', sans-serif;
+    font-size: 15px;
+    margin: 2em;
+    background-color: $light-blue;
+    color: $dark-blue; 
+    border: 1px solid $dark-blue;
+}

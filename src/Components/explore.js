@@ -5,6 +5,7 @@ import {
   fetchCompanies, fetchAllReviews, fetchAvRating, fetchAllPositions,
 } from '../Actions';
 import ExploreCompany from './exploreCompany';
+import './explore.scss';
 
 
 class Explore extends Component {
@@ -12,7 +13,7 @@ class Explore extends Component {
     super(props);
 
     this.state = {
-      selectValue: 'None',
+      selectValue: 'Filter By Position',
     };
   }
 
@@ -58,7 +59,7 @@ class Explore extends Component {
           allPosList.add(array[i]);
         }
       }
-      allPosList.add('None');
+      allPosList.add('Filter By Position');
       return Array.from(allPosList);
     }
     return allPosList;
@@ -89,7 +90,7 @@ class Explore extends Component {
     const tiles = Array.from(bigMap.keys()).map((key) => {
       const positionsHere = bigMap.get(key).positions;
       // console.log(positionsHere);
-      if (this.state.selectValue === 'None') {
+      if (this.state.selectValue === 'Filter By Position') {
         return (
           <ExploreCompany name={key} rating={bigMap.get(key).avRating} />
         );
@@ -105,8 +106,8 @@ class Explore extends Component {
     return (
       <div className="review-info">
         {dropdown}
-        Explore page
-        {tiles}
+        <h1 className="explore-header">Explore Dartmouth&apos;s Favorite Companies</h1>
+        <div className="explore-blocks">{tiles}</div>
       </div>
     );
   }
