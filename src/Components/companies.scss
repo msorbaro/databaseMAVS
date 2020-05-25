@@ -56,6 +56,11 @@ body, html {
   text-align: center;
   color: $dark-blue;
 }
+
+.stars-avg-rating {
+  padding-right:1em;
+  padding-left:1em;
+}
 .description {
   font-family: Avenir Next;
   font-weight: 600;
@@ -87,8 +92,9 @@ body, html {
 .add-review-button {
   background-color: $light-blue;
   color: $dark-blue;
-  padding: 0.2em;
+  padding: 0.3em;
   border: 1px  solid  $dark-blue;
+  border-radius: 10px;
 }
 .add-review-button:hover {
   background-color: $dark-blue;
