@@ -18,14 +18,14 @@ export const ActionTypes = {
 };
 // example function where we are getting companies
 export function fetchCompanies() {
-  console.log("at least im here")
+//  console.log("at least im here")
   return (dispatch) => {
-    console.log( `${ROOT_URL}/api/companies`);
-    console.log("myurl^")
+  //  console.log( `${ROOT_URL}/api/companies`);
+  //  console.log("myurl^")
     axios.get(`${ROOT_URL}/api/companies/`).then((response) => {
     //  console.log(response.data);
-      console.log("I GOT A RESPONSE!!!")
-      console.log(response.data.response)
+      // console.log("I GOT A RESPONSE!!!")
+      // console.log(response.data.response)
       dispatch({
         type: ActionTypes.FETCH_COMPANIES,
         payload: response.data.response,
@@ -85,6 +85,24 @@ export function addCompany(fields, history) {
         setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
       }));
   };
+}
+
+
+export function addReview(fields, history) {
+  // console.log(fields);
+  // console.log("made it here and these are my fields")
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/api/review`, fields).then((res) => {
+      const url = '/company/' + fields.CompanyName;
+    //  console.log(url)
+      history.push(url)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+  //history.push('/')
 }
 
 // example function to get the current user

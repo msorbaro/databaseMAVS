@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './companies.scss';
 import Review from './reviews';
 import { fetchCompany, fetchCompanyPositions, fetchCompanyReviews } from '../Actions';
@@ -77,6 +77,7 @@ class Company extends Component {
         </div>
 
         <div>
+          <Link to={`/addReview/${this.props.match.params.id}`}>Add Review</Link>
           <div className="subtitle">
             Reviews
           </div>
