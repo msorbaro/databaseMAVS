@@ -17,6 +17,7 @@ export const ActionTypes = {
   FETCH_COMPANY_REVIEWS: 'FETCH_COMPANY_REVIEWS',
   FETCH_ALL_REVIEWS: 'FETCH_ALL_REVIEWS',
   FETCH_ALL_RATINGS: 'FETCH_ALL_RATINGS',
+  FETCH_USER_REVIEWS: 'FETCH_USER_REVIEWS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -170,6 +171,22 @@ export function fetchUser(email) {
       // console.log("in axios, this is what is back from db");
       // console.log(res.data.response[0]);
       // console.log("***")
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchUserReviews(email) {
+  return (dispatch) => {
+    // console.log("here + email below")
+    // console.log(email)
+    axios.get(`${ROOT_URL}/api/users/${email}/reviews`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_USER_REVIEWS, payload: res.data.response });
+      // console.log("getting user reviews");
+      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
