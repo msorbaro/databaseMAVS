@@ -7,8 +7,8 @@ const initialState = {
 
 
 const userReducer = (state = initialState, action) => {
-  console.log('in user reducer');
-  console.log(action);
+  // console.log('in user reducer');
+  // console.log(action);
   switch (action.type) {
     case ActionTypes.FETCH_USER:
       return {
