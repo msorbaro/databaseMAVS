@@ -12,6 +12,7 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      triedsignIn: false,
 
     };
     this.onEmailChange = this.onEmailChange.bind(this);
@@ -28,21 +29,24 @@ class SignIn extends Component {
   }
 
   onSubmit = (event) => {
-    console.log('at signin.js function');
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log('credentials above');
+    // console.log('at signin.js function');
+    // console.log(this.state.email);
+    // console.log(this.state.password);
+    // console.log('credentials above');
     const user = { email: this.state.email, password: this.state.password };
-    console.log(user);
-    console.log('user above');
-    console.log(this.props.history);
-    console.log('history above');
+    // console.log(user);
+    // console.log('user above');
+    // console.log(this.props.history);
+    // console.log('history above');
+    console.log("about to go to sign in user")
     this.props.signinUser(this.state, this.props.history);
     // this.props.signinUser(user, this.props.history);
+    this.setState({triedsignIn: true})
   }
 
 
   render() {
+    var error = this.state.triedsignIn ? <p> enter correct login info </p> : null;
     return (
       <div className="sign-in-up-page">
         <div className="content">
@@ -55,6 +59,7 @@ class SignIn extends Component {
           {/* <div className="right-div"> */}
           <div className="right-inputs">
             <p className="sign-in-text">Sign in with your email:</p>
+            {error}
             <div className="text-boxes">
               <input className="login-text-box" onChange={this.onEmailChange} placeholder="Enter Email" />
               <div />
