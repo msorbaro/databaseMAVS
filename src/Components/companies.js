@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './companies.scss';
-import { fetchCompany, fetchCompanyPositions } from '../Actions';
+import Review from './reviews';
+import { fetchCompany, fetchCompanyPositions, fetchCompanyReviews } from '../Actions';
 
 
 class Company extends Component {
@@ -14,21 +15,10 @@ class Company extends Component {
     this.reviews = ["review1", "review2", "review3"];
   }
 
-  // renderReviews = () => {
-  //   if (len(this.reviews) == 0) {
-  //     return (<div> No Reviews Yet! </div>);
-  //   } else {
-  //     return this.reviews.map((review) => {
-  //       return (
-  //
-  //
-  //     )
-  //   }
-  // }
-
   componentDidMount() {
     this.props.fetchCompany(this.props.match.params.id);
     this.props.fetchCompanyPositions(this.props.match.params.id)
+    this.props.fetchCompanyReviews(this.props.match.params.id);
   }
 
   render() {
@@ -45,6 +35,13 @@ class Company extends Component {
         <p>{word}</p>
       )
     })
+
+    var reviews = this.props.reviews.length > 0 ? this.props.reviews.map((review)=>{
+      console.log(review)
+      return(<Review reviewInfo={review}/>)
+    }) : null;
+
+    console.log(this.props.reviews);
 
     return (
       <div className="content">
@@ -84,12 +81,7 @@ class Company extends Component {
             Reviews
           </div>
           <div className="reviews">
-            <div className="review">
-              {this.reviews[0]}
-            </div>
-            <div className="review">
-              {this.reviews[1]}
-            </div>
+          {reviews}
           </div>
 
         </div>
@@ -100,7 +92,8 @@ class Company extends Component {
 
 function mapStateToProps(state) {
   return { specificCompany: state.company.specificCompany,
-  specificCompanyPositions: state.company.specificCompanyPositions };
+  specificCompanyPositions: state.company.specificCompanyPositions,
+  reviews: state.company.reviews};
 }
 
-export default withRouter(connect(mapStateToProps, {fetchCompany, fetchCompanyPositions})(Company));
+export default withRouter(connect(mapStateToProps, {fetchCompany, fetchCompanyPositions, fetchCompanyReviews})(Company));

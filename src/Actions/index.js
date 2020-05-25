@@ -14,6 +14,7 @@ export const ActionTypes = {
   CLEAR_ERROR: 'CLEAR_ERROR',
   FETCH_COMPANY: 'FETCH_COMPANY',
   FETCH_COMPANY_POSITIONS: 'FETCH_COMPANY_POSITIONS',
+  FETCH_COMPANY_REVIEWS: 'FETCH_COMPANY_REVIEWS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -24,6 +25,7 @@ export function fetchCompanies() {
     axios.get(`${ROOT_URL}/api/companies/`).then((response) => {
     //  console.log(response.data);
       console.log("I GOT A RESPONSE!!!")
+      console.log(response.data.response)
       dispatch({
         type: ActionTypes.FETCH_COMPANIES,
         payload: response.data.response,
@@ -59,7 +61,21 @@ export function fetchCompanyPositions(name) {
   };
 }
 
-export function addCompany(fields) {
+export function fetchCompanyReviews(name) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/${name}/reviews`).then((res) => {
+      dispatch({ type: ActionTypes.FETCH_COMPANY_REVIEWS, payload: res.data.response });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function addCompany(fields, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/companies`, fields).then((res) => {
       history.push('/')
@@ -74,13 +90,13 @@ export function addCompany(fields) {
 // example function to get the current user
 export function fetchUser(email) {
   return (dispatch) => {
-    console.log("here + email below")
-    console.log(email)
+    // console.log("here + email below")
+    // console.log(email)
     axios.get(`${ROOT_URL}/api/users/${email}`).then((res) => {
       dispatch({ type: ActionTypes.FETCH_USER, payload: res.data.response[0] });
-      console.log("in axios, this is what is back from db");
-      console.log(res.data.response[0]);
-      console.log("***")
+      // console.log("in axios, this is what is back from db");
+      // console.log(res.data.response[0]);
+      // console.log("***")
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -91,10 +107,10 @@ export function fetchUser(email) {
 
 export function editUser(fields, email) {
   return (dispatch)=> {
-    console.log("in edit user");
+  //  console.log("in edit user");
     axios.patch(`${ROOT_URL}/api/users/${email}`, fields).then((res) => {
-      console.log("dispatching at edit user!")
-      console.log(res.data)
+      // console.log("dispatching at edit user!")
+      // console.log(res.data)
       dispatch({ type: ActionTypes.FETCH_USER, payload: fields });
       //console.log("in axios, this is what is back from db");
       //console.log(res.data.response[0]);
@@ -121,10 +137,10 @@ export function authError(error, code) {
 }
 
 export function signinUser(user, history) {
-  console.log('at actions');
+  // console.log('at actions');
   return (dispatch) => {
-    console.log('AFTER DISPATCH');
-    console.log((`${ROOT_URL}/api/signin`));
+    // console.log('AFTER DISPATCH');
+    // console.log((`${ROOT_URL}/api/signin`));
     axios.put(`${ROOT_URL}/api/signin`, user).then((response) => {
       // const userInfo = { username: response.data.username, password: response.data.password };
       dispatch({ type: ActionTypes.AUTH_USER, email: user.email });
@@ -134,31 +150,31 @@ export function signinUser(user, history) {
       // localStorage.setItem('username', response.data.username);
       history.push('/');
     }).catch((error) => {
-      console.log('theres an error');
+    //   console.log('theres an error');
       dispatch({ type: ActionTypes.AUTH_USER, payload: error });
       // setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
     });
   };
 }
 export function signupUser(user, history) {
-  console.log(`${ROOT_URL}/api/signup`)
-  console.log("Tryina hithere")
-
-  console.log('at SignupUser');
-  console.log(user);
-  console.log('persons info printed above');
+  // console.log(`${ROOT_URL}/api/signup`)
+  // console.log("Tryina hithere")
+  //
+  // console.log('at SignupUser');
+  // console.log(user);
+  // console.log('persons info printed above');
   // takes in an object with email and password (minimal user object)
 
   // returns a thunk method that takes dispatch as an argument (just like our create post method really)
   return (dispatch) => {
     // does an axios.post on the /signup endpoint (only difference from above)
-    console.log("AFTER DISPLATCE")
+    //console.log("AFTER DISPLATCE")
 
     axios.post(`${ROOT_URL}/api/signup`, user).then((response) => {
       // on success does:
       //  dispatch({ type: ActionTypes.AUTH_USER });
-      console.log(response);
-      console.log('this is the response');
+      // console.log(response);
+      // console.log('this is the response');
       dispatch({ type: ActionTypes.AUTH_USER, firstname: user.firstname, email: user.email});
       //  localStorage.setItem('token', response.data.token);
       localStorage.setItem('token', response.data.token);
@@ -181,7 +197,7 @@ export function signoutUser(history) {
     localStorage.removeItem('token');
     localStorage.removeItem('firstname');
     localStorage.removeItem('email');
-    console.log("sgning out")
+    //console.log("sgning out")
     dispatch({ type: ActionTypes.DEAUTH_USER });
     history.push('/');
   };

@@ -5,6 +5,7 @@ const initialState = {
   allCompanies: [],
   specificCompany: {},
   specificCompanyPositions: {},
+  reviews: {},
 };
 
 
@@ -16,6 +17,8 @@ const companyReducer = (state = initialState, action) => {
       return { ...state, specificCompany: action.payload };
     case ActionTypes.FETCH_COMPANY_POSITIONS:
       return { ...state, specificCompanyPositions: action.payload };
+    case ActionTypes.FETCH_COMPANY_REVIEWS:
+      return { ...state, reviews: action.payload };
     default:
       return state;
   }
