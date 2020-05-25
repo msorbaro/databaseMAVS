@@ -1,0 +1,49 @@
+$dark-blue: #272C55;
+$medium-blue: #86B6FF;
+$light-blue: #CCE0FF;
+$grey-color: #C4C4C4;
+$white-color: #FCFDFF;
+
+body, html {
+    height: 100%;
+}
+
+.add-a-review  {
+    margin: 1em;
+}
+.review-content {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.review-input-name {
+    font-size: 20px;
+    color: $dark-blue;
+
+}
+
+.review-text-box {
+    width: 300px;
+    margin: 0 auto;
+    padding:  1em;
+    font-size: 15px;
+    color: $dark-blue;
+    font-family: 'Avenir Next',  sans-serif;
+
+}
+
+.submit-review {
+    font-family: "Avenir Next", sans-serif;
+    font-size: 20px;
+    padding: 0.5em 5em;
+    margin: 0.5em;
+    background-color: $light-blue;
+    color: $dark-blue;
+    border-radius: 1em;
+    border: 0.5px  solid $dark-blue;
+    outline: none;
+}
+
+// .submit-review:hover  {
+
+// }
