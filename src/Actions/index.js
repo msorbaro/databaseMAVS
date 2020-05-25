@@ -269,18 +269,23 @@ export function authError(error, code) {
 }
 
 export function signinUser(user, history) {
-  // console.log('at actions');
+   console.log('at index.js!!');
   return (dispatch) => {
     // console.log('AFTER DISPATCH');
     // console.log((`${ROOT_URL}/api/signin`));
+    console.log("in sign in")
     axios.put(`${ROOT_URL}/api/signin`, user).then((response) => {
       // const userInfo = { username: response.data.username, password: response.data.password };
-      dispatch({ type: ActionTypes.AUTH_USER, email: user.email });
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('email', user.email);
+      console.log("response********")
+      console.log(response.data.response)
+      if(response.data.response){
+        dispatch({ type: ActionTypes.AUTH_USER, email: user.email });
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('email', user.email);
 
-      // localStorage.setItem('username', response.data.username);
-      history.push('/');
+        // localStorage.setItem('username', response.data.username);
+        history.push('/');
+      }
     }).catch((error) => {
     //   console.log('theres an error');
       dispatch({ type: ActionTypes.AUTH_USER, payload: error });
