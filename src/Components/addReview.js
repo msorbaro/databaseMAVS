@@ -11,7 +11,7 @@ class AddReview extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {position: '', year: '', term: '', city: '', state: '', rating: '', comment: '', anonymous: ''};
+    this.state = {position: '', year: '', term: '', city: '', state: '', rating: '', comment: '', anonymous: '', diff: ''};
   }
 
 
@@ -47,6 +47,9 @@ class AddReview extends Component {
   anonymousChange = (event) => {
     this.setState({ anonymous: event.target.value });
   }
+  diffChange = (event) => {
+    this.setState({ diff: event.target.value });
+  }
 
   submit = () => {
     const fields = {
@@ -60,7 +63,9 @@ class AddReview extends Component {
       Rating: this.state.rating,
       Comment: this.state.comment,
       Anonymous: this.state.anonymous,
+      InterviewDifficulty: this.state.diff,
     }
+  //  console.log(this.state.rating);
     this.props.addReview(fields, this.props.history);
   }
 
@@ -79,8 +84,11 @@ class AddReview extends Component {
           <input className="review-text-box" onChange={this.cityChange} value={this.state.city} />
           <p className= "review-input-name"> State: </p>
           <input className="review-text-box" onChange={this.stateChange} value={this.state.state} />
+          <p className= "review-input-name"> Interview Difficulty: </p>
+          <input className="review-text-box" onChange={this.diffChange} value={this.state.diff} />
+
           <p className= "review-input-name"> Rating: </p>
-          
+
           <ReactStars count={5} onChange={this.ratingChange} value={this.state.rating} half={false} size={24} color2="#86B6FF"></ReactStars>
 
           {/* <input className="review-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} /> */}

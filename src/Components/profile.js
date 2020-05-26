@@ -64,12 +64,12 @@ class Profile extends Component {
 
 
   render() {
-    console.log(this.props.user);
-    console.log('this is the user ^');
+    // console.log(this.props.user);
+    // console.log('this is the user ^');
     if (!this.state.editMode) {
       const reviews = this.props.user.reviews != null ? this.props.user.reviews.map((review) => {
       //  console.log(review)
-        return (<Review reviewInfo={review} />);
+        return (<Review reviewInfo={review} path="/profile" />);
       }) : null;
       return (
         <div className="profile-info">
