@@ -45,7 +45,7 @@ class Profile extends Component {
   }
 
   save = () => {
-    const fields = { email: this.props.user.email };
+    const fields = {};
     if (this.state.firstname !== '') {
       fields.FirstName = this.state.firstname;
     }
