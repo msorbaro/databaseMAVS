@@ -53,18 +53,19 @@ class Profile extends Component {
       fields.LastName = this.state.lastname;
     }
     if (this.state.major !== '') {
-      fields.major = this.state.major;
+      fields.Major = this.state.major;
     }
     if (this.state.gradYear !== '') {
       fields.GradYear = this.state.gradYear;
     }
-    this.props.editUser(fields, this.props.email);
+    this.props.editUser(fields, this.props.email, this.props.history);
     this.setState({ editMode: false });
   }
 
 
   render() {
-    console.log(this.props.user.reviews);
+    console.log(this.props.user);
+    console.log('this is the user ^');
     if (!this.state.editMode) {
       const reviews = this.props.user.reviews != null ? this.props.user.reviews.map((review) => {
       //  console.log(review)
@@ -76,7 +77,7 @@ class Profile extends Component {
           <h2> Name: {this.props.user.firstname} {this.props.user.lastname} </h2>
           <h2> Year of Graduation: {this.props.user.gradYear} </h2>
           <h2> Declared Major: {this.props.user.major} </h2>
-          <h2> Contact Information: {this.props.user.email} </h2>
+          <h2> Contact Information: {this.props.email} </h2>
           <button className="edit" type="button" onClick={this.tryMe}> Edit Information</button>
           <p> Reviews </p>
           {reviews}
