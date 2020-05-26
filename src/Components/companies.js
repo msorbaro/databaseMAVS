@@ -6,6 +6,7 @@ import './companies.scss';
 import Review from './reviews';
 import {Bar, Doughnut} from 'react-chartjs-2';
 import { fetchCompany, fetchCompanyPositions, fetchCompanyReviews } from '../Actions';
+import ReactStars from 'react-stars';
 
 
 class Company extends Component {
@@ -208,7 +209,7 @@ class Company extends Component {
           <div className="boxes">
             <div className="box" id="box1">
               <div className="numbers">
-                {avRating}
+                <ReactStars className="stars-avg-rating" edit={false} value={avRating} color2="#272C55" color1="#C4C4C4" size={30}/>
               </div>
               <div className="description" id="box2">
                 Average Rating

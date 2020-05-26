@@ -20,6 +20,7 @@ class ExploreCompany extends Component {
           <ReactStars className="star-rating" edit={false} count={5} value={this.props.rating} half={false} size={24} color2="#86B6FF" />
         </div>
       </Link>
+
     );
   }
 }
