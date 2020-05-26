@@ -15,6 +15,7 @@ class SignUp extends Component {
       lastName: '',
       major: '',
       gradYear: '',
+      dartmouthEmailError: false,
 
     };
     this.onEmailChange = this.onEmailChange.bind(this);
@@ -48,19 +49,27 @@ class SignUp extends Component {
     }
 
     onSubmit = (event) => {
-      console.log('got to onSubmit');
+    //  console.log('got to onSubmit');
       const user = { email: this.state.email, password: this.state.password,
         firstname: this.state.firstName, lastname: this.state.lastName, major: this.state.major, gradYear: this.state.gradYear };
-      console.log("user here?");
-      console.log(user);
-      this.props.signupUser(user, this.props.history);
+      // console.log("user here?");
+      // console.log(user);
+      if (this.state.email.endsWith('@dartmouth.edu') || this.state.email.endsWith('@Dartmouth.edu')){
+        this.props.signupUser(user, this.props.history);
+      }
+      else {
+        this.setState({dartmouthEmailError: true})
+      }
     }
 
 
     render() {
+
+      var error = this.state.dartmouthEmailError ? <p> Please use Dartmouth Email </p> : null;
       return (
         <div className="sign-up-page">
           <div className="signup-form">
+          {error}
             <p className ="sign-up-text">Sign Up:</p>
             <input className="login-text-box" onChange={this.onEmailChange} placeholder="Enter Email" />
             <input className="login-text-box" onChange={this.onPasswordChange} placeholder="Enter Password" />
