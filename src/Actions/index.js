@@ -19,6 +19,8 @@ export const ActionTypes = {
   FETCH_ALL_RATINGS: 'FETCH_ALL_RATINGS',
   FETCH_USER_REVIEWS: 'FETCH_USER_REVIEWS',
   FETCH_ALL_POSITIONS: 'FETCH_ALL_POSITIONS',
+  FETCH_ALL_INTERVIEW_DIFFICULTIES: 'FETCH_ALL_INTERVIEW_DIFFICULTIES',
+  FETCH_ALL_LOCATIONS: 'FETCH_ALL_LOCATIONS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -132,6 +134,49 @@ export function fetchAvRating() {
   };
 }
 
+export function fetchAvInterviewDifficulty() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      let totRatingMap = new Map();
+      let totCountMap = new Map();
+      for(var i = 0; i< res.data.response.length; i+=1){
+        var company = res.data.response[i].CompanyName;
+        if(totCountMap.has(company)){
+          var currCount = totCountMap.get(company) +1;
+          totCountMap.set(company, currCount);
+          // console.log(res.data.response[i]);
+          var currrating = totRatingMap.get(company) + res.data.response[i].InterviewDifficulty;
+          totRatingMap.set(company, currrating);
+        }
+        else {
+          totCountMap.set(company, 1);
+          totRatingMap.set(company, res.data.response[i].InterviewDifficulty);
+        }
+      }
+
+      let finalMap = new Map();
+      for(let key of totRatingMap.keys()){
+        let totRating = totRatingMap.get(key);
+        let totCount = totCountMap.get(key);
+        // console.log(totRating);
+        // console.log(totCount);
+        // console.log(key);
+        finalMap.set(key, Math.round(totRating/totCount));
+      }
+      // console.log("I did all the map crap");
+      // console.log(finalMap)
+
+      dispatch({ type: ActionTypes.FETCH_ALL_INTERVIEW_DIFFICULTIES, payload: finalMap });
+      // console.log("HERE");
+      // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
 export function fetchAllPositions() {
   console.log("in all posisitons!*****************")
   return (dispatch) => {
@@ -164,6 +209,40 @@ export function fetchAllPositions() {
       }));
   };
 }
+
+export function fetchAllLocations() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      let returnMap = new Map();
+      for(var i = 0; i< res.data.response.length; i+=1){
+        var company = res.data.response[i].CompanyName;
+        var city = res.data.response[i].City;
+        var state = res.data.response[i].State;
+        // console.log(city);
+        // console.log(state);
+        // console.log(res.data.response[i])
+        var position = city + ", " + state;
+        if(returnMap.has(company)){
+          var currPositions = returnMap.get(company).add(position);
+          returnMap.set(company, currPositions);
+        }
+        else {
+          var newSet = new Set();
+          newSet.add(position);
+          returnMap.set(company, newSet);
+        }
+      }
+      dispatch({ type: ActionTypes.FETCH_ALL_LOCATIONS, payload: returnMap });
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+
+
 
 export function addCompany(fields, history) {
   return (dispatch) => {
@@ -237,6 +316,21 @@ export function fetchUserReviews(email) {
   };
 }
 
+
+export function editReview(id, fields, email, history, path) {
+  // console.log("hello?")
+  // console.log(id)
+  //   console.log("in edit review");
+    axios.patch(`${ROOT_URL}/api/reviews/${id}`, fields).then((response) => {
+      // console.log(path);
+      history.push(path);
+    })
+      .catch(((error) => {
+      //  dispatch({ type: 'ERROR', payload: { error: error.message } });
+      console.log("error")
+      }));
+}
+
 export function editUser(fields, email, history) {
   return (dispatch)=> {
   //  console.log("in edit user");
@@ -256,6 +350,8 @@ export function editUser(fields, email, history) {
       }));
   };
 }
+
+
 
 /** *
 This is all the signout / up / in stuff we would need
