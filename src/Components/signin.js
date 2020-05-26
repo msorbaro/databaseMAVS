@@ -63,7 +63,7 @@ class SignIn extends Component {
             <div className="text-boxes">
               <input className="login-text-box" onChange={this.onEmailChange} placeholder="Enter Email" />
               <div />
-              <input className="login-text-box" onChange={this.onPasswordChange} placeholder="Enter Password" />
+              <input className="login-text-box" type="password" onChange={this.onPasswordChange} placeholder="Enter Password" />
 
             </div>
             <button className="login-button" type="submit" onClick={this.onSubmit}>Login</button>

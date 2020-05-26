@@ -16,7 +16,7 @@ const Nav = (props) => {
           <li className="navElement"><NavLink to="/">Home</NavLink></li>
           <li className="navElement"><NavLink to="/explore">Explore</NavLink></li>
           <li className="navElement"><NavLink to="/profile">Profile</NavLink></li>
-          <li id="sign-out-nav" className="navElement"><NavLink to="/" onClick={() => props.signoutUser(props.history)}>Sign Out</NavLink></li>
+          <li id="sign-out-nav" className="navElement"><NavLink to="/signin" onClick={() => props.signoutUser(props.history)}>Sign Out</NavLink></li>
         </ul>
       </nav>
     );
@@ -25,7 +25,6 @@ const Nav = (props) => {
       <nav className="navBar">
         <ul>
           <li className="navElement"><NavLink to="/"><img className="logoAnchor" src={logo} alt="BreadBoxlogo" /></NavLink></li>
-          <li className="navElement"><NavLink to="/">Home</NavLink></li>
           <li className="navElement"><NavLink to="/signin">Sign In</NavLink></li>
           <li className="navElement"><NavLink to="/signup">Sign Up </NavLink></li>
         </ul>
