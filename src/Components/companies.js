@@ -224,12 +224,13 @@ class Company extends Component {
               </div>
             </div>
           </div>
-          {positionBar}
-          {myBarChart}
           <p className="prev-positions">Positions Previously Offered</p>
           <div className="all-positions">
           {positionJSX}
           </div>
+          {positionBar}
+          {myBarChart}
+          
         </div>
 
         <div>
