@@ -303,6 +303,7 @@ class Company extends Component {
           {positionBar}
           {myBarChart}
           {locationBar}
+
           <p className="prev-positions">Positions Previously Offered</p>
           <div className="all-positions">
           {positionJSX}
@@ -311,6 +312,7 @@ class Company extends Component {
           <div className="all-positions">
           {locationJSX}
           </div>
+
         </div>
 
         <div>
