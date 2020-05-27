@@ -11,7 +11,7 @@ class AddReview extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {position: '', year: '', term: '', city: '', state: '', rating: '', comment: '', anonymous: '', diff: ''};
+    this.state = {fieldsError: false, position: '', year: '', term: '', city: '', state: '', rating: '', comment: '', anonymous: '', diff: ''};
   }
 
 
@@ -66,20 +66,61 @@ class AddReview extends Component {
       InterviewDifficulty: this.state.diff,
     }
   //  console.log(this.state.rating);
-    this.props.addReview(fields, this.props.history);
+    if ((this.state.position === '' || this.state.term === '' || this.state.year === ''|| this.state.city === ''
+      || this.state.state === ''|| this.state.rating === '' || this.state.comment === ''
+      || this.state.anonymous === '' || this.state.diff === '') === false) {
+        this.props.addReview(fields, this.props.history);
+      } else {
+        this.setState({fieldsError: true});
+      }
+
+  }
+
+  yearDropdown = () => {
+    return (
+      <select value={this.state.year} onChange={this.yearChange}>
+        <option value="20"> 2020 </option>
+        <option value="19"> 2019 </option>
+        <option value="18"> 2018 </option>
+        <option value="17"> 2017 </option>
+        <option value="16"> 2016 </option>
+      </select>
+    );
+  }
+
+  termDropdown = () => {
+    return (
+      <select value={this.state.term} onChange={this.termChange}>
+        <option value="F"> Fall </option>
+        <option value="W"> Winter </option>
+        <option value="S"> Spring </option>
+        <option value="X"> Summer </option>
+      </select>
+    );
+  }
+
+  anonDropdown = () => {
+    return (
+      <select value={this.state.anonymous} onChange={this.anonymousChange}>
+        <option value="0"> No </option>
+        <option value="1"> Yes </option>
+      </select>
+    );
   }
 
   render() {
+    var error = this.state.fieldsError ? <p> PLEASE FILL ALL FIELDS </p> : null;
     return (
       <div>
         <h1 className= "add-a-review"> Add a review for {this.props.match.params.id}</h1>
         <div className="review-content">
+          {error}
           <p className= "review-input-name"> Position Title: </p>
           <input className="review-text-box" onChange={this.positionChange} value={this.state.position} />
           <p className= "review-input-name"> Term: </p>
-          <input className="review-text-box" onChange={this.termChange} value={this.state.term} />
+          <div> {this.termDropdown()} </div>
           <p className= "review-input-name"> Year: </p>
-          <input className="review-text-box" onChange={this.yearChange} value={this.state.year} />
+          <div> {this.yearDropdown()} </div>
           <p className= "review-input-name"> City: </p>
           <input className="review-text-box" onChange={this.cityChange} value={this.state.city} />
           <p className= "review-input-name"> State: </p>
@@ -94,8 +135,8 @@ class AddReview extends Component {
           {/* <input className="review-text-box" type="number" onChange={this.ratingChange} value={this.state.rating} /> */}
           <p className= "review-input-name"> Comment: </p>
           <input className="review-text-box" onChange={this.commentChange} value={this.state.comment} />
-          <p className= "review-input-name"> Would you like to be Anonymous? (1 = Yes and 0 = No)</p>
-          <input className="review-text-box" type="number" onChange={this.anonymousChange} value={this.state.anonymous} />
+          <p className= "review-input-name"> Would you like to be Anonymous?</p>
+          <div> {this.anonDropdown()} </div>
           <button className="submit-review" type="button" onClick={this.submit}> Submit </button>
         </div>
       </div>

@@ -44,6 +44,22 @@ body, html {
     outline: none;
 }
 
-// .submit-review:hover  {
+.submit-review:hover  {
+  font-family: "Avenir Next", sans-serif;
+  font-size: 20px;
+  padding: 0.5em 5em;
+  margin: 0.5em;
+  background-color: $dark-blue;
+  color: $light-blue;
+  border-radius: 1em;
+  border: 0.5px  solid $light-blue;
+  outline: none;
+}
 
-// }
+select {
+    font-family: 'Avenir-Next', sans-serif;
+    font-size: 20px;
+    background-color: $light-blue;
+    color: $dark-blue;
+    border: 1px solid $dark-blue;
+}

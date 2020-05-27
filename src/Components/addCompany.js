@@ -11,7 +11,7 @@ class AddCompany extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {field: '', name:'', size: ''};
+    this.state = {fieldsError: false, field: '', name:'', size: ''};
   }
 
 
@@ -33,20 +33,43 @@ class AddCompany extends Component {
       size: this.state.size,
       field: this.state.field,
     }
-    this.props.addCompany(fields, this.props.history);
+    if ((this.state.name === '' || this.state.size === '' || this.state.field === '') === false) {
+      this.props.addCompany(fields, this.props.history);
+    } else {
+      this.setState({fieldsError: true});
+    }
+  }
+
+  sizeDropdown = () => {
+    return (
+      // mysql requiring int
+      <select value={this.state.size} onChange={this.sizeChange}>
+        <option value="15"> 0-15 people </option>
+        <option value="200"> 16-200 people </option>
+        <option value="500"> 201-500 people </option>
+        <option value="1000"> 501-1000 people </option>
+        <option value="3000"> 1001-3000 people </option>
+        <option value="1000"> 3001-5000 people </option>
+        <option value="50000"> 5000+ people </option>
+      </select>
+    );
   }
 
   render() {
+    var error = this.state.fieldsError ? <p> PLEASE FILL ALL FIELDS </p> : null;
     return (
-      <div className="content">
-        <p> add a company </p>
-        <p> company name </p>
-        <input className="login-text-box" onChange={this.nameChange} value={this.state.name} />
-        <p> company size </p>
-        <input className="login-text-box" type="number" onChange={this.sizeChange} value={this.state.size} />
-        <p> company field </p>
-        <input className="login-text-box" onChange={this.fieldChange} value={this.state.field} />
-        <button type="button" onClick={this.submit}> submit </button>
+      <div>
+        <h1 className= "add-a-company"> Add a Company </h1>
+        <div className="company-content">
+          {error}
+          <p className="company-input-name"> Company Name: </p>
+          <input className="company-text-box" onChange={this.nameChange} value={this.state.name} />
+          <p className="company-input-name"> Company Size: </p>
+          {this.sizeDropdown()}
+          <p className="company-input-name"> Company Field: </p>
+          <input className="company-text-box" onChange={this.fieldChange} value={this.state.field} />
+          <button className="submit-company" type="button" onClick={this.submit}> submit </button>
+        </div>
       </div>
     );
   }

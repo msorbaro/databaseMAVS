@@ -22,6 +22,7 @@ class SignUp extends Component {
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.firstnameChange = this.firstnameChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.gradYearChange = this.gradYearChange.bind(this);
   }
 
     onEmailChange = (event) => {
@@ -51,7 +52,7 @@ class SignUp extends Component {
     onSubmit = (event) => {
     //  console.log('got to onSubmit');
       const user = { email: this.state.email, password: this.state.password,
-        firstname: this.state.firstName, lastname: this.state.lastName, major: this.state.major, gradYear: this.state.gradYear };
+        firstname: this.state.firstName, lastname: this.state.lastName, major: this.state.major, gradyear: this.state.gradYear };
       // console.log("user here?");
       // console.log(user);
       if (this.state.email.endsWith('@dartmouth.edu') || this.state.email.endsWith('@Dartmouth.edu')){

@@ -37,6 +37,18 @@ class Review extends Component {
     this.setState({ comment: event.target.value });
   }
 
+  showCompanyName = () => {
+    if (this.props.path === '/profile') {
+      return (
+        <p> Company: {this.props.reviewInfo.CompanyName} </p>
+      );
+    } else {
+      return (
+        null
+      );
+    }
+  }
+
   render() {
     const name = this.props.reviewInfo.Anonymous === 1 ? 'Anonymous'
       : `${this.props.reviewInfo.FirstName} ${this.props.reviewInfo.LastName}`;
@@ -49,9 +61,13 @@ class Review extends Component {
       </div>
     ) : null;
 
+    const date = new Date(this.props.reviewInfo.ReviewDate);
+    const formatDate = date.toDateString();
+
     if (!this.state.editMode) {
       return (
         <div id="review-info">
+          {this.showCompanyName()}
           <div className="review-top">
             <p className="top">{name} </p>
             <p className="top"> YOG: {this.props.reviewInfo.GradYear} </p>
@@ -60,12 +76,11 @@ class Review extends Component {
           </div>
           <p className="review-body"> {this.props.reviewInfo.Comment} </p>
           <div className="review-bottom">
-            {buttons}
             <p className="bottom"> Rating: </p>
             <ReactStars edit={false} count={5} value={this.props.reviewInfo.Rating} half={false} size={15} color2="#86B6FF" />
-            <p className="bottom"> review date: {this.props.reviewInfo.ReviewDate} </p>
-
+            <p className="bottom"> Review Date: {formatDate} </p>
           </div>
+          {buttons}
 
         </div>
       );
@@ -82,7 +97,7 @@ class Review extends Component {
           <div className="review-bottom">
             <p className="bottom"> Rating: </p>
             <ReactStars edit={false} count={5} value={this.props.reviewInfo.Rating} half={false} size={15} color2="#86B6FF" />
-            <p className="bottom"> review date: {this.props.reviewInfo.ReviewDate} </p>
+            <p className="bottom"> review date: {formatDate} </p>
             <button onClick={this.save} type="button"> Save </button>
           </div>
 

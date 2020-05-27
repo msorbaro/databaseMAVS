@@ -11,6 +11,7 @@ $white-color: #FCFDFF;
 
 .profile-info {
     font-family: "Avenir Next", sans-serif;
+    padding-left: 60px;
 }
 .edit {
     padding: 1em;
@@ -18,7 +19,7 @@ $white-color: #FCFDFF;
     font-size: 15px;
     font-family: "Avenir Next", sans-serif;
     background-color: $light-blue;
-    border: 0.5px  solid $dark-blue; 
+    border: 0.5px  solid $dark-blue;
     color: $dark-blue;
     border-radius: 1em;
 }
@@ -29,7 +30,14 @@ $white-color: #FCFDFF;
     font-size: 15px;
     font-family: "Avenir Next", sans-serif;
     background-color: $dark-blue;
-    border: 0.5px  solid $light-blue; 
+    border: 0.5px  solid $light-blue;
     color: $light-blue;
     cursor: pointer;
+}
+
+.reviews {
+  display: grid;
+  row-gap: 0.5em;
+  padding-top: 1em;
+  margin-right: 1em;
 }

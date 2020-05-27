@@ -7,6 +7,55 @@ $white-color: #FCFDFF;
 .dropDown {
 width: 50%;
 justify-content: center;
-list-style: none; 
-margin:  auto; 
+list-style: none;
+margin:  auto;
+}
+
+.add-a-company  {
+    margin: 1em;
+}
+.company-content {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.company-input-name {
+    font-size: 20px;
+    color: $dark-blue;
+
+}
+
+.company-text-box {
+    width: 300px;
+    margin: 0 auto;
+    padding:  1em;
+    font-size: 15px;
+    color: $dark-blue;
+    font-family: 'Avenir Next',  sans-serif;
+
+}
+
+.submit-company {
+    font-family: "Avenir Next", sans-serif;
+    font-size: 20px;
+    padding: 0.5em 5em;
+    margin: 0.5em;
+    background-color: $light-blue;
+    color: $dark-blue;
+    border-radius: 1em;
+    border: 0.5px  solid $dark-blue;
+    outline: none;
+}
+
+.submit-company:hover {
+    font-family: "Avenir Next", sans-serif;
+    font-size: 20px;
+    padding: 0.5em 5em;
+    margin: 0.5em;
+    background-color: $dark-blue;
+    color: $light-blue;
+    border-radius: 1em;
+    border: 0.5px  solid $light-blue;
+    outline: none;
+    cursor: pointer;
 }
