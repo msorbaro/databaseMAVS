@@ -230,7 +230,7 @@ class Explore extends Component {
           {dropdown}
           {locationDropdown}
           {sortDropdown}
-          <h1 className="explore-header">Explore Dartmouth&apos;s Favorite Companies</h1>
+          <h1 className="explore-header">Explore Dartmouth&apos;s Favorite Employers</h1>
           <div className="explore-blocks">{tiles}</div>
         </div>
       );
