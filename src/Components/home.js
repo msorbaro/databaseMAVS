@@ -82,7 +82,7 @@ class HomePage extends Component {
       <div className="homeInput">
         <img className="logo" src={logo} alt="BreadBoxlogo" />
         <h1>Bread Box</h1>
-        <h2>Recommendations and reviews of jobs from our Dartmouth community.</h2>
+        <h2>Reviews of jobs to help Dartmouth students get this bread!</h2>
         <input className="mainSearchBar" placeholder="Search for companies..." value={text} onChange={this.onTextChanged} type="text" />
         {this.renderCompanies()}
       </div>

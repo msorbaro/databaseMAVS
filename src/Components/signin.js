@@ -53,7 +53,7 @@ class SignIn extends Component {
           <div className="left-inputs">
             <img className="graphic" src={graphic} alt="Graphic" />
             <h1 important="loginH1">Bread Box</h1>
-            <h2 className="loginText">Recommendations and reviews of jobs from our Dartmouth community.</h2>
+            <h2 className="loginText">Write reviews of jobs to help Dartmouth students get this bread!</h2>
           </div>
 
           {/* <div className="right-div"> */}
