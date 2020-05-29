@@ -317,13 +317,13 @@ export function fetchUserReviews(email) {
 }
 
 
-export function editReview(id, fields, email, history, path) {
+export function editReview(id, fields, email, history, path, company) {
   // console.log("hello?")
   // console.log(id)
   //   console.log("in edit review");
     axios.patch(`${ROOT_URL}/api/reviews/${id}`, fields).then((response) => {
-      // console.log(path);
-      history.push(path);
+      history.push("/" + path);
+
     })
       .catch(((error) => {
       //  dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -336,8 +336,7 @@ export function editUser(fields, email, history) {
   //  console.log("in edit user");
     axios.patch(`${ROOT_URL}/api/users/${email}`, fields).then((res) => {
       // console.log("dispatching at edit user!")
-       console.log(fields);
-       console.log("edit fields ^")
+       console.log(res);
        dispatch({ type: ActionTypes.FETCH_USER, payload: fields });
       //console.log("in axios, this is what is back from db");
       //console.log(res.data.response[0]);

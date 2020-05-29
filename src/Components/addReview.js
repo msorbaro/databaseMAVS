@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-dom';
 import {  addReview } from '../Actions';
 import ReactStars from 'react-stars'
 import './addReview.scss';
+import csc from 'country-state-city'
 
 
 class AddReview extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {fieldsError: false, position: '', year: '', term: '', city: '', state: '', rating: '', comment: '', anonymous: '', diff: ''};
+    this.state = {fieldsError: false, position: '', year: '20', term: 'F', city: '', state: 'Alabama', rating: '', comment: '', anonymous: '0', diff: '1', stateID: '3919'};
   }
 
 
@@ -65,7 +66,17 @@ class AddReview extends Component {
       Anonymous: this.state.anonymous,
       InterviewDifficulty: this.state.diff,
     }
-  //  console.log(this.state.rating);
+    console.log(this.state.rating);
+    console.log(this.state.position)
+    console.log(this.state.term);
+    console.log(this.state.year);
+    console.log(this.state.city);
+    console.log(this.state.state);
+    console.log(this.state.comment);
+    console.log(this.state.anonymous);
+    console.log(this.state.diff);
+;
+
     if ((this.state.position === '' || this.state.term === '' || this.state.year === ''|| this.state.city === ''
       || this.state.state === ''|| this.state.rating === '' || this.state.comment === ''
       || this.state.anonymous === '' || this.state.diff === '') === false) {
@@ -108,7 +119,37 @@ class AddReview extends Component {
     );
   }
 
+  difficultyDropDown = () => {
+    return (
+      <select value={this.state.diff} onChange={this.diffChange}>
+        <option value="1"> 1 </option>
+        <option value="2"> 2 </option>
+        <option value="3"> 3 </option>
+        <option value="4"> 4 </option>
+        <option value="5"> 5 </option>
+        <option value="6"> 6 </option>
+        <option value="7"> 7 </option>
+        <option value="8"> 8 </option>
+        <option value="9"> 9 </option>
+        <option value="10"> 10 </option>
+      </select>
+    );
+  }
+
   render() {
+    var states = csc.getStatesOfCountry("231").map((state)=>{
+      console.log(state)
+      return(
+        <option value={state.name}> {state.name} </option>
+      )
+    })
+
+    var stateDropDown = (
+      <select value={this.state.state} onChange={this.stateChange}>
+      {states}
+      </select>
+    )
+
     var error = this.state.fieldsError ? <p> PLEASE FILL ALL FIELDS </p> : null;
     return (
       <div>
@@ -121,12 +162,12 @@ class AddReview extends Component {
           <div> {this.termDropdown()} </div>
           <p className= "review-input-name"> Year: </p>
           <div> {this.yearDropdown()} </div>
+          <p className= "review-input-name"> State: </p>
+          {stateDropDown}
           <p className= "review-input-name"> City: </p>
           <input className="review-text-box" onChange={this.cityChange} value={this.state.city} />
-          <p className= "review-input-name"> State: </p>
-          <input className="review-text-box" onChange={this.stateChange} value={this.state.state} />
-          <p className= "review-input-name"> Interview Difficulty: </p>
-          <input className="review-text-box" onChange={this.diffChange} value={this.state.diff} />
+          <p className= "review-input-name"> Interview Difficulty: (1 low, 10 high)</p>
+          <div> {this.difficultyDropDown()} </div>
 
           <p className= "review-input-name"> Rating: </p>
 

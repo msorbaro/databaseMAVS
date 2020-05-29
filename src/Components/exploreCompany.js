@@ -17,7 +17,7 @@ class ExploreCompany extends Component {
       <Link to={`/company/${this.props.name}`}>
         <div className="explore-rating">
           <h2 className="explore-company-name">Company: {this.props.name}</h2>
-          <p> Interview Difficulty: {this.props.interviewDi} </p>
+          <p className="star-rating"> Interview Difficulty: {this.props.interviewDi} </p>
           <ReactStars className="star-rating" edit={false} count={5} value={this.props.rating} half={false} size={24} color2="#86B6FF" />
         </div>
       </Link>

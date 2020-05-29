@@ -12,8 +12,9 @@ import ReactStars from 'react-stars';
 class Company extends Component {
   constructor(props) {
     super(props);
+    console.log("refreshing")
 
-    this.state = {};
+    this.state = {showPosition: true, showTerm: false, showLocation: false};
     this.reviews = ["review1", "review2", "review3"];
   }
 
@@ -83,6 +84,18 @@ class Company extends Component {
       if(position!=null) {scoresMap.set(position, currTermCount);}
     }
     return scoresMap;
+  }
+
+  changeToStudentsPositions = () => {
+    this.setState({showPosition: true, showTerm: false, showLocation: false})
+  }
+
+  changeToStudentsTerms = () => {
+    this.setState({showPosition: false, showTerm: true, showLocation: false})
+  }
+
+  changeToStudentsLocations = () => {
+    this.setState({showPosition: false, showTerm: false, showLocation: true})
   }
 
   render() {
@@ -264,13 +277,35 @@ class Company extends Component {
 
     var reviews = this.props.reviews.length > 0 ? this.props.reviews.map((review)=>{
     //  console.log(review)
-      return(<Review reviewInfo={review} refresh={this.refresh}/>)
+      return(<Review reviewInfo={review} path={"company"}/>)
     }) : null;
 
     //console.log(this.props.reviews);
 
     var avRating = this.props.reviews.length > 0 ? this.calculateAverageRating() : 0;
     var avInterviewDifficulry = this.props.reviews.length > 0 ? this.calculateAverageInterviewDifficulty(): 0;
+
+    var classNameUnclicked ="add-review-button";
+    var clickedClassName = "clicked-button";
+    var buttons = (
+      <div style={{display: 'flex', width: '90%', justifyContent:"space-between"}}>
+        <button className={this.state.showPosition ? clickedClassName : classNameUnclicked} onClick={this.changeToStudentsPositions}> Students by Positions </button>
+        <button className={this.state.showTerm ? clickedClassName : classNameUnclicked} onClick={this.changeToStudentsTerms}> Students Hired Per Term </button>
+        <button className={this.state.showLocation ? clickedClassName : classNameUnclicked} onClick={this.changeToStudentsLocations}> Students per Location </button>
+      </div>
+    )
+
+    var graph = null;
+    if(this.state.showPosition){
+      graph = positionBar
+    }
+    else if(this.state.showTerm){
+      graph = myBarChart
+    }
+    else {
+      graph = locationBar
+    }
+
     return (
       <div className="content">
         <div className="left">
@@ -300,9 +335,11 @@ class Company extends Component {
               </div>
             </div>
           </div>
-          {positionBar}
-          {myBarChart}
-          {locationBar}
+          <p className="prev-positions">Show Different Graphs</p>
+          <div style={{marginTop: 20}}>
+            {buttons}
+          </div>
+          {graph}
 
           <p className="prev-positions">Positions Previously Offered</p>
           <div className="all-positions">
