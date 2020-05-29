@@ -29,7 +29,10 @@ class Review extends Component {
     const fields = {
       Comment: this.state.comment,
     };
-    editReview(this.props.reviewInfo.ReviewID, fields, this.props.email, this.props.history, this.props.path);
+    console.log(this.props.reviewInfo);
+    const path = `${this.props.path}/${this.props.reviewInfo.CompanyName}`;
+    console.log(path);
+    editReview(this.props.reviewInfo.ReviewID, fields, this.props.email, this.props.history, path, this.props.reviewInfo.CompanyName);
     this.setState({ editMode: false });
   }
 

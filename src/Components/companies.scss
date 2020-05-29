@@ -104,9 +104,18 @@ body, html {
   border: 1px  solid  $light-blue;
 }
 
+.clicked-button {
+  background-color: $dark-blue;
+  color: $light-blue;
+  padding: 0.4em;
+  font-weight: 400;
+  border: 1px  solid  $light-blue;
+  border-radius: 10px;
+}
+
 .all-positions{
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .positions-tags {
@@ -140,7 +149,7 @@ body, html {
 
   #box2 {
     grid-column: 1/2;
-    grid-row: 2; 
+    grid-row: 2;
 
   }
 
@@ -148,11 +157,9 @@ body, html {
     font-size: 40px;
   }
   .description {
-    font-size:15px;  
+    font-size:15px;
   }
 
 
- 
+
 }
-
-

@@ -15,11 +15,12 @@ $very-light-blue: #F0F6FF;
     background-color:  $very-light-blue;
     margin: 1em;
     // padding:  1em;
+    flex-direction: column;
 }
 
 .explore-rating:hover{
     background-color: $light-blue;
-    cursor: pointer;  
+    cursor: pointer;
 }
 
 .explore-blocks {
@@ -49,6 +50,6 @@ select {
     font-size: 15px;
     margin: 2em;
     background-color: $light-blue;
-    color: $dark-blue; 
+    color: $dark-blue;
     border: 1px solid $dark-blue;
 }

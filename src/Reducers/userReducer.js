@@ -2,7 +2,7 @@ import { ActionTypes } from '../actions';
 
 
 const initialState = {
-  firstname: '', email: '', lastname: '', major: '', gradYear: '', reviews: null,
+  firstname: '', lastname: '', major: '', gradYear: '', reviews: null,
 };
 
 
@@ -11,12 +11,14 @@ const userReducer = (state = initialState, action) => {
   // console.log(action);
   switch (action.type) {
     case ActionTypes.FETCH_USER:
+      console.log(action.payload.FirstName);
+      console.log(state);
       return {
         ...state,
-        firstname: action.payload.FirstName,
-        lastname: action.payload.LastName,
-        major: action.payload.Major,
-        gradYear: action.payload.GradYear,
+        firstname: action.payload.FirstName == null ? state.firstname : action.payload.FirstName,
+        lastname: action.payload.LastName == null ? state.lastname : action.payload.LastName,
+        major: action.payload.Major == null ? state.major : action.payload.Major,
+        gradYear: action.payload.GradYear == null ? state.gradYear : action.payload.GradYear,
       };
     case ActionTypes.FETCH_USER_REVIEWS:
       return {
