@@ -1,9 +1,10 @@
 # databaseMAVS
 
-# Hi Team! Here is our front end. 
+# Hi! Here how to run our front end:
+* First, make sure that your backend is running (see backend readme) and that you are connected to the Dartmouth VPN
 * After pulling, run "yarn" to load all the dependencies 
 * Then type "yarn start" to actually run the code 
-* Go to localHost://8080 to see the front end in action.
+* Go to localHost://8080 to see the front end in action
 
 
 # Some endpoints we are going to need to the backend 
