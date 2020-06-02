@@ -1,3 +1,7 @@
+/*
+This profile component shows the users information
+The user is able to edit their information and submit a change to the database
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -80,12 +84,9 @@ class Profile extends Component {
   }
 
   render() {
-    // console.log(this.props.user);
-    // console.log('this is the user ^');
     const error = this.state.emptyError ? <p> Please fill out all fields </p> : null;
     if (!this.state.editMode) {
       const reviews = this.props.user.reviews != null ? this.props.user.reviews.map((review) => {
-      //  console.log(review)
         return (<Review reviewInfo={review} path="/profile" />);
       }) : null;
       return (

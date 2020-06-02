@@ -1,4 +1,7 @@
 /* eslint-disable */
+/*
+This component is the form a user must fill out to sign in
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
@@ -29,16 +32,7 @@ class SignIn extends Component {
   }
 
   onSubmit = (event) => {
-    // console.log('at signin.js function');
-    // console.log(this.state.email);
-    // console.log(this.state.password);
-    // console.log('credentials above');
     const user = { email: this.state.email, password: this.state.password };
-    // console.log(user);
-    // console.log('user above');
-    // console.log(this.props.history);
-    // console.log('history above');
-    console.log("about to go to sign in user")
     this.props.signinUser(this.state, this.props.history);
     // this.props.signinUser(user, this.props.history);
     this.setState({triedsignIn: true})

@@ -1,4 +1,8 @@
 /* eslint-disable */
+/*
+Tnis is the component that is home and allows the user to search for a specific company
+It gets all the companies from the database and uses an autocomplete component
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
@@ -38,8 +42,6 @@ class HomePage extends Component {
         items.push(this.props.allCompanies[i].CompanyName);
       }
     }
-    // console.log(items);
-    // console.log("^^ items")
     const { value } = e.target;
     let companies = [];
     if (value.length > 0) {
@@ -73,10 +75,6 @@ class HomePage extends Component {
 
   render() {
     //this.props.fetchCompanies();
-
-
-
-  //  console.log(this.props.allCompanies)
     const { text } = this.state;
     return (
       <div className="homeInput">

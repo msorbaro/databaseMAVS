@@ -1,3 +1,8 @@
+/*
+This is our nav bar.
+The state is authenticated if the user is logged in,and then they can see their profile etc
+otherwise they can just have the options to sign in or out
+*/
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,8 +11,6 @@ import logo from '../img/logo.png';
 import './navbar.scss';
 
 const Nav = (props) => {
-  console.log(props.authenticated);
-  console.log('^^ auth');
   if (props.authenticated) {
     return (
       <nav className="navBar">

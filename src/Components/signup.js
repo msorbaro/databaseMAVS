@@ -1,4 +1,5 @@
 /* eslint-disable */
+/*This is the form a user fills out to sign up*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
@@ -50,11 +51,8 @@ class SignUp extends Component {
     }
 
     onSubmit = (event) => {
-    //  console.log('got to onSubmit');
       const user = { email: this.state.email, password: this.state.password,
         firstname: this.state.firstName, lastname: this.state.lastName, major: this.state.major, gradyear: this.state.gradYear };
-      // console.log("user here?");
-      // console.log(user);
       if (this.state.email.endsWith('@dartmouth.edu') || this.state.email.endsWith('@Dartmouth.edu')){
         this.props.signupUser(user, this.props.history);
       }

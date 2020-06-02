@@ -1,5 +1,7 @@
 /* eslint-disable */
-
+/*
+These are the functions that connect to the API and get back important data from the database
+*/
 import axios from 'axios';
 
 // need to put in right url link here dependiunbg on API
@@ -24,14 +26,8 @@ export const ActionTypes = {
 };
 // example function where we are getting companies
 export function fetchCompanies() {
-//  console.log("at least im here")
   return (dispatch) => {
-  //  console.log( `${ROOT_URL}/api/companies`);
-  //  console.log("myurl^")
     axios.get(`${ROOT_URL}/api/companies/`).then((response) => {
-    //  console.log(response.data);
-      // console.log("I GOT A RESPONSE!!!")
-      // console.log(response.data.response)
       dispatch({
         type: ActionTypes.FETCH_COMPANIES,
         payload: response.data.response,
@@ -71,8 +67,6 @@ export function fetchCompanyReviews(name) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/api/companies/${name}/reviews`).then((res) => {
       dispatch({ type: ActionTypes.FETCH_COMPANY_REVIEWS, payload: res.data.response });
-      // console.log("HERE");
-      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -85,8 +79,6 @@ export function fetchAllReviews() {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
       dispatch({ type: ActionTypes.FETCH_ALL_REVIEWS, payload: res.data.response });
-      // console.log("HERE");
-      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -120,12 +112,7 @@ export function fetchAvRating() {
         let totCount = totCountMap.get(key);
         finalMap.set(key, Math.round(totRating/totCount));
       }
-      // console.log("I did all the map crap");
-      // console.log(finalMap)
-
       dispatch({ type: ActionTypes.FETCH_ALL_RATINGS, payload: finalMap });
-      // console.log("HERE");
-      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -144,7 +131,6 @@ export function fetchAvInterviewDifficulty() {
         if(totCountMap.has(company)){
           var currCount = totCountMap.get(company) +1;
           totCountMap.set(company, currCount);
-          // console.log(res.data.response[i]);
           var currrating = totRatingMap.get(company) + res.data.response[i].InterviewDifficulty;
           totRatingMap.set(company, currrating);
         }
@@ -158,17 +144,10 @@ export function fetchAvInterviewDifficulty() {
       for(let key of totRatingMap.keys()){
         let totRating = totRatingMap.get(key);
         let totCount = totCountMap.get(key);
-        // console.log(totRating);
-        // console.log(totCount);
-        // console.log(key);
         finalMap.set(key, Math.round(totRating/totCount));
       }
-      // console.log("I did all the map crap");
-      // console.log(finalMap)
 
       dispatch({ type: ActionTypes.FETCH_ALL_INTERVIEW_DIFFICULTIES, payload: finalMap });
-      // console.log("HERE");
-      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -178,10 +157,8 @@ export function fetchAvInterviewDifficulty() {
 }
 
 export function fetchAllPositions() {
-  console.log("in all posisitons!*****************")
   return (dispatch) => {
     axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
-      console.log("here in axios call")
       let returnMap = new Map();
       for(var i = 0; i< res.data.response.length; i+=1){
         var company = res.data.response[i].CompanyName;
@@ -196,12 +173,7 @@ export function fetchAllPositions() {
           returnMap.set(company, newSet);
         }
       }
-      console.log("I did all the map crap");
-      console.log(returnMap)
-
       dispatch({ type: ActionTypes.FETCH_ALL_POSITIONS, payload: returnMap });
-      // console.log("HERE");
-      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -218,9 +190,6 @@ export function fetchAllLocations() {
         var company = res.data.response[i].CompanyName;
         var city = res.data.response[i].City;
         var state = res.data.response[i].State;
-        // console.log(city);
-        // console.log(state);
-        // console.log(res.data.response[i])
         var position = city + ", " + state;
         if(returnMap.has(company)){
           var currPositions = returnMap.get(company).add(position);
@@ -258,12 +227,9 @@ export function addCompany(fields, history) {
 
 
 export function addReview(fields, history) {
-   console.log(fields);
-   console.log("made it here and these are my fields")
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/review`, fields).then((res) => {
       const url = '/company/' + fields.CompanyName;
-    //  console.log(url)
       history.push(url)
     })
       .catch(((error) => {
@@ -277,13 +243,8 @@ export function addReview(fields, history) {
 // example function to get the current user
 export function fetchUser(email) {
   return (dispatch) => {
-    // console.log("here + email below")
-    // console.log(email)
     axios.get(`${ROOT_URL}/api/users/${email}`).then((res) => {
       dispatch({ type: ActionTypes.FETCH_USER, payload: res.data.response[0] });
-      // console.log("in axios, this is what is back from db");
-      // console.log(res.data.response[0]);
-      // console.log("***")
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -293,21 +254,15 @@ export function fetchUser(email) {
 }
 
 export function deleteReview(id, history, whereToGo) {
-  console.log("here in general")
   axios.delete(`${ROOT_URL}/api/reviews/${id}`).then((res) => {
-    console.log("deleted")
     history.push('/')
   })
 }
 
 export function fetchUserReviews(email) {
   return (dispatch) => {
-    // console.log("here + email below")
-    // console.log(email)
     axios.get(`${ROOT_URL}/api/users/${email}/reviews`).then((res) => {
       dispatch({ type: ActionTypes.FETCH_USER_REVIEWS, payload: res.data.response });
-      // console.log("getting user reviews");
-      // console.log(res.data.response)
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
@@ -318,9 +273,6 @@ export function fetchUserReviews(email) {
 
 
 export function editReview(id, fields, email, history, path, company) {
-  // console.log("hello?")
-  // console.log(id)
-  //   console.log("in edit review");
     axios.patch(`${ROOT_URL}/api/reviews/${id}`, fields).then((response) => {
       history.push("/" + path);
 
@@ -333,14 +285,8 @@ export function editReview(id, fields, email, history, path, company) {
 
 export function editUser(fields, email, history) {
   return (dispatch)=> {
-  //  console.log("in edit user");
     axios.patch(`${ROOT_URL}/api/users/${email}`, fields).then((res) => {
-      // console.log("dispatching at edit user!")
-       console.log(res);
        dispatch({ type: ActionTypes.FETCH_USER, payload: fields });
-      //console.log("in axios, this is what is back from db");
-      //console.log(res.data.response[0]);
-    //  console.log("***")
       history.push("/profile")
     })
       .catch(((error) => {
@@ -366,15 +312,9 @@ export function authError(error, code) {
 }
 
 export function signinUser(user, history) {
-   console.log('at index.js!!');
   return (dispatch) => {
-    // console.log('AFTER DISPATCH');
-    // console.log((`${ROOT_URL}/api/signin`));
-    console.log("in sign in")
     axios.put(`${ROOT_URL}/api/signin`, user).then((response) => {
       // const userInfo = { username: response.data.username, password: response.data.password };
-      console.log("response********")
-      console.log(response.data.response)
       if(response.data.response){
         dispatch({ type: ActionTypes.AUTH_USER, email: user.email });
         localStorage.setItem('token', response.data.token);

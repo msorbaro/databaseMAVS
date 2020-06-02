@@ -1,4 +1,11 @@
 /* eslint-disable */
+/*
+This is the page that shows all the information about a company
+It gets the information from the databse, and we use chart JS to display it
+we also use the star rating components to show ratings on reviews and for the company
+Companies have position and location data, as well as review data.
+We parse all the specific info from each of the reviews
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
@@ -12,7 +19,6 @@ import ReactStars from 'react-stars';
 class Company extends Component {
   constructor(props) {
     super(props);
-    console.log("refreshing")
 
     this.state = {showPosition: true, showTerm: false, showLocation: false};
     this.reviews = ["review1", "review2", "review3"];
@@ -25,7 +31,6 @@ class Company extends Component {
   }
 
   refresh = () => {
-  //  console.log("here")
     this.props.fetchCompany(this.props.match.params.id);
     this.props.fetchCompanyPositions(this.props.match.params.id)
     this.props.fetchCompanyReviews(this.props.match.params.id);
@@ -36,7 +41,6 @@ class Company extends Component {
     for (var i = 0; i < this.props.reviews.length; i++) {
       totalReviewScore = totalReviewScore + this.props.reviews[i].Rating
     }
-  //  console.log(totalReviewScore);
     return Math.round(totalReviewScore/this.props.reviews.length)
   }
 
@@ -45,7 +49,6 @@ class Company extends Component {
     for (var i = 0; i < this.props.reviews.length; i++) {
       totalReviewScore = totalReviewScore + this.props.reviews[i].InterviewDifficulty;
     }
-  //  console.log(totalReviewScore);
     return Math.round(totalReviewScore/this.props.reviews.length)
   }
 
@@ -131,7 +134,7 @@ class Company extends Component {
       datasets: [
         {
            label: "People Hired",
-           backgroundColor: ['rgba(134, 182, 255, 0.5)','rgba(134, 182, 255, 0.5)','rgba(134, 182, 255, 0.5)'],
+           backgroundColor: ['rgba(134, 182, 255, 0.5)','rgba(134, 182, 255, 0.5)','rgba(134, 182, 255, 0.5)', 'rgba(134, 182, 255, 0.5)', 'rgba(134, 182, 255, 0.5)', 'rgba(134, 182, 255, 0.5)', 'rgba(134, 182, 255, 0.5)'],
            data: data,
         }
       ],
@@ -262,7 +265,6 @@ class Company extends Component {
     // var locations = new Set();
     // if(this.props.specific)
 
-    //console.log(Array.from(positions))
     var positionJSX = Array.from(positions).map((word)=> {
       return(
         <p className="positions-tags">{word}</p>
@@ -276,11 +278,8 @@ class Company extends Component {
     })
 
     var reviews = this.props.reviews.length > 0 ? this.props.reviews.map((review)=>{
-    //  console.log(review)
       return(<Review reviewInfo={review} path={"company"}/>)
     }) : null;
-
-    //console.log(this.props.reviews);
 
     var avRating = this.props.reviews.length > 0 ? this.calculateAverageRating() : 0;
     var avInterviewDifficulry = this.props.reviews.length > 0 ? this.calculateAverageInterviewDifficulty(): 0;

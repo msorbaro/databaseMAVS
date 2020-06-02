@@ -1,4 +1,5 @@
 /* eslint-disable */
+/*This is the page that lets a user add a review*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -66,15 +67,6 @@ class AddReview extends Component {
       Anonymous: this.state.anonymous,
       InterviewDifficulty: this.state.diff,
     }
-    console.log(this.state.rating);
-    console.log(this.state.position)
-    console.log(this.state.term);
-    console.log(this.state.year);
-    console.log(this.state.city);
-    console.log(this.state.state);
-    console.log(this.state.comment);
-    console.log(this.state.anonymous);
-    console.log(this.state.diff);
 ;
 
     if ((this.state.position === '' || this.state.term === '' || this.state.year === ''|| this.state.city === ''
@@ -138,7 +130,6 @@ class AddReview extends Component {
 
   render() {
     var states = csc.getStatesOfCountry("231").map((state)=>{
-      console.log(state)
       return(
         <option value={state.name}> {state.name} </option>
       )

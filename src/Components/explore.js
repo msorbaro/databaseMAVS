@@ -1,3 +1,9 @@
+/*
+This page contains all the companies, and basic information about them required to sort
+For a full view of company info, you can go to the company page
+Here we sort the companies by their average rating, difficulty, and alphabetically.
+You can also filter for internships by locations or positions
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -30,7 +36,6 @@ class Explore extends Component {
 
   // Company should have a rating
   makeStateMap = () => {
-    // console.log('here');
     const bigMap = new Map();
     if (this.props.allCompanyLocations != null
        && this.props.allCompanyInterviewDifficulty != null && this.props.allCompanyRatings != null && this.props.allCompanies != null && this.props.allCompanyPositions != null) {
@@ -55,12 +60,9 @@ class Explore extends Component {
 
   calcAllPositions = () => {
     let allPosList = null;
-    //  console.log('HERE************');
-    //    console.log(this.props.allCompanyPositions);
     if (this.props.allCompanyPositions != null) {
       allPosList = new Set();
 
-      //  console.log('here');
       for (const key of this.props.allCompanyPositions.keys()) {
         const nextSet = this.props.allCompanyPositions.get(key);
         const array = Array.from(nextSet);
@@ -106,10 +108,6 @@ class Explore extends Component {
     }
 
     render() {
-      //  console.log(this.props.allCompanyInterviewDifficulty);
-    // console.log('all company ratings');
-
-      //  console.log(this.props.allCompanyLocations);
       const bigMap = this.makeStateMap();
 
       const allPositions = this.calcAllPositions();
@@ -126,7 +124,6 @@ class Explore extends Component {
       );
 
       const allLocations = this.calcAllLocations();
-      // console.log(allLocations);
 
       const optionsForLocationSelect = allLocations == null ? null
         : allLocations.map((location) => {
@@ -147,10 +144,8 @@ class Explore extends Component {
         </select>
       );
 
-      //  console.log('attempting sorts:');
       const mapAlpha = new Map([...bigMap.entries()].sort());
       const mapAvRating = new Map([...bigMap.entries()].sort((a, b) => {
-      //  console.log(a[1].avRating);
         if (a[1].avRating === 'N/a' && b[1].avRating === 'N/a') {
           return 0;
         }
@@ -169,7 +164,6 @@ class Explore extends Component {
         return 0;
       }));
       const mapAvInterviewDif = new Map([...bigMap.entries()].sort((a, b) => {
-      //  console.log(a[1].avInterviewDifficulty);
         if (a[1].avInterviewDifficulty === 'N/a' && b[1].avInterviewDifficulty === 'N/a') {
           return 0;
         }
@@ -187,9 +181,6 @@ class Explore extends Component {
         }
         return 0;
       }));
-      // console.log(mapAvRating);
-      // console.log(mapAlpha);
-      // console.log(mapAvInterviewDif);
       let mapToUse = bigMap;
       if (this.state.selectSortValue === 'Alphabetically') {
         mapToUse = mapAlpha;
@@ -224,7 +215,6 @@ class Explore extends Component {
       });
 
 
-      // console.log(this.state.compData);
       return (
         <div className="review-info">
           {dropdown}

@@ -1,3 +1,6 @@
+/*
+This is the individual company component that is displayed on the explore page
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';

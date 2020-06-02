@@ -1,3 +1,7 @@
+/*
+The review is a specific review on the company page
+This contains information about a users experience
+*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -29,9 +33,7 @@ class Review extends Component {
     const fields = {
       Comment: this.state.comment,
     };
-    console.log(this.props.reviewInfo);
     const path = `${this.props.path}/${this.props.reviewInfo.CompanyName}`;
-    console.log(path);
     editReview(this.props.reviewInfo.ReviewID, fields, this.props.email, this.props.history, path, this.props.reviewInfo.CompanyName);
     this.setState({ editMode: false });
   }

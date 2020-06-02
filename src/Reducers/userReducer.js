@@ -7,12 +7,8 @@ const initialState = {
 
 
 const userReducer = (state = initialState, action) => {
-  // console.log('in user reducer');
-  // console.log(action);
   switch (action.type) {
     case ActionTypes.FETCH_USER:
-      console.log(action.payload.FirstName);
-      console.log(state);
       return {
         ...state,
         firstname: action.payload.FirstName == null ? state.firstname : action.payload.FirstName,
