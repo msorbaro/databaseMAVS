@@ -15,7 +15,6 @@ class Company extends Component {
     console.log("refreshing")
 
     this.state = {showPosition: true, showTerm: false, showLocation: false};
-    this.reviews = ["review1", "review2", "review3"];
   }
 
   componentDidMount() {
@@ -331,7 +330,7 @@ class Company extends Component {
                 {avInterviewDifficulry} / 10
               </div>
               <div className="description">
-                Difficulty Rating
+                Interview Difficulty Rating
               </div>
             </div>
           </div>

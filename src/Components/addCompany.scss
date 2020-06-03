@@ -12,10 +12,10 @@ margin:  auto;
 }
 
 .add-a-company  {
-    margin: 1em;
+    margin: .5em;
 }
 .company-content {
-    width: 300px;
+    padding-left: 60px;
     margin: 0 auto;
 }
 
@@ -26,20 +26,18 @@ margin:  auto;
 }
 
 .company-text-box {
-    width: 300px;
-    margin: 0 auto;
-    padding:  1em;
-    font-size: 15px;
-    color: $dark-blue;
-    font-family: 'Avenir Next',  sans-serif;
-
+  outline: none;
+  font-size: 20px;
+  padding: 0.5em 1em;
+  color: $dark-blue;
+  font-family: 'Avenir Next',  sans-serif;
 }
 
 .submit-company {
     font-family: "Avenir Next", sans-serif;
     font-size: 20px;
     padding: 0.5em 5em;
-    margin: 0.5em;
+    margin: 1em 0em;
     background-color: $light-blue;
     color: $dark-blue;
     border-radius: 1em;
@@ -51,11 +49,20 @@ margin:  auto;
     font-family: "Avenir Next", sans-serif;
     font-size: 20px;
     padding: 0.5em 5em;
-    margin: 0.5em;
+    margin: 1em 0em;
     background-color: $dark-blue;
     color: $light-blue;
     border-radius: 1em;
     border: 0.5px  solid $light-blue;
     outline: none;
     cursor: pointer;
+}
+
+#addcompany-select {
+  font-family: 'Avenir-Next', sans-serif;
+  font-size: 20px;
+  background-color: $light-blue;
+  color: $dark-blue;
+  border: 1px solid $dark-blue;
+  margin: 0em 0.5em;
 }

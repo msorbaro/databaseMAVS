@@ -70,7 +70,7 @@ class Profile extends Component {
 
   yearDropdown = () => {
     return (
-      <select value={this.state.gradYear === null ? this.props.user.gradYear : this.state.gradYear} onChange={this.gradYearChange}>
+      <select id="profile-select" value={this.state.gradYear === null ? this.props.user.gradYear : this.state.gradYear} onChange={this.gradYearChange}>
         <option value="2020"> 2020 </option>
         <option value="2021"> 2021 </option>
         <option value="2022"> 2022 </option>
@@ -107,7 +107,7 @@ class Profile extends Component {
     } else {
       return (
         <div className="profile-info">
-          <h1 className="welcome"> Please enter or edit your profile below: </h1>
+          <h1 className="welcome"> Please edit your profile below: </h1>
           {error}
           <p> First Name </p>
           <input className="login-text-box" onChange={this.firstnameChange} value={this.state.firstname === null ? this.props.user.firstname : this.state.firstname} />
@@ -118,7 +118,7 @@ class Profile extends Component {
           <p> Major </p>
           <input className="login-text-box" onChange={this.majorChange} value={this.state.major === null ? this.props.user.major : this.state.major} />
           <div>
-            <button type="button" className="edit" onClick={this.save}> save </button>
+            <button type="button" className="edit" onClick={this.save}> Save </button>
           </div>
         </div>
       );

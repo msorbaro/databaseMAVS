@@ -21,6 +21,7 @@ export const ActionTypes = {
   FETCH_ALL_POSITIONS: 'FETCH_ALL_POSITIONS',
   FETCH_ALL_INTERVIEW_DIFFICULTIES: 'FETCH_ALL_INTERVIEW_DIFFICULTIES',
   FETCH_ALL_LOCATIONS: 'FETCH_ALL_LOCATIONS',
+  FETCH_ALL_REVIEW_COUNTS: 'FETCH_ALL_REVIEW_COUNTS',
 };
 // example function where we are getting companies
 export function fetchCompanies() {
@@ -126,6 +127,31 @@ export function fetchAvRating() {
       dispatch({ type: ActionTypes.FETCH_ALL_RATINGS, payload: finalMap });
       // console.log("HERE");
       // console.log(res.data.response)
+    })
+      .catch(((error) => {
+        dispatch({ type: 'ERROR', payload: { error: error.message } });
+        setTimeout(() => { dispatch({ type: ActionTypes.CLEAR_ERROR }); }, 2000);
+      }));
+  };
+}
+
+export function fetchAllReviewCounts() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/companies/reviews`).then((res) => {
+      let totCountMap = new Map();
+      for(var i = 0; i< res.data.response.length; i+=1){
+        var company = res.data.response[i].CompanyName;
+        if(totCountMap.has(company)){
+          var currCount = totCountMap.get(company) +1;
+          totCountMap.set(company, currCount);
+        }
+        else {
+          totCountMap.set(company, 1);
+        }
+      }
+      console.log(totCountMap);
+      dispatch({ type: ActionTypes.FETCH_ALL_REVIEW_COUNTS, payload: totCountMap });
+      console.log('fetch counts!');
     })
       .catch(((error) => {
         dispatch({ type: 'ERROR', payload: { error: error.message } });
