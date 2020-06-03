@@ -89,7 +89,7 @@ class AddReview extends Component {
 
   yearDropdown = () => {
     return (
-      <select value={this.state.year} onChange={this.yearChange}>
+      <select id="addreview-select" value={this.state.year} onChange={this.yearChange}>
         <option value="20"> 2020 </option>
         <option value="19"> 2019 </option>
         <option value="18"> 2018 </option>
@@ -101,7 +101,7 @@ class AddReview extends Component {
 
   termDropdown = () => {
     return (
-      <select value={this.state.term} onChange={this.termChange}>
+      <select id="addreview-select" value={this.state.term} onChange={this.termChange}>
         <option value="F"> Fall </option>
         <option value="W"> Winter </option>
         <option value="S"> Spring </option>
@@ -112,7 +112,7 @@ class AddReview extends Component {
 
   anonDropdown = () => {
     return (
-      <select value={this.state.anonymous} onChange={this.anonymousChange}>
+      <select id="addreview-select" value={this.state.anonymous} onChange={this.anonymousChange}>
         <option value="0"> No </option>
         <option value="1"> Yes </option>
       </select>
@@ -121,7 +121,7 @@ class AddReview extends Component {
 
   difficultyDropDown = () => {
     return (
-      <select value={this.state.diff} onChange={this.diffChange}>
+      <select id="addreview-select" value={this.state.diff} onChange={this.diffChange}>
         <option value="1"> 1 </option>
         <option value="2"> 2 </option>
         <option value="3"> 3 </option>
@@ -145,7 +145,7 @@ class AddReview extends Component {
     })
 
     var stateDropDown = (
-      <select value={this.state.state} onChange={this.stateChange}>
+      <select id="addreview-select" value={this.state.state} onChange={this.stateChange}>
       {states}
       </select>
     )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  fetchCompanies, fetchAllReviews, fetchAvRating, fetchAllPositions, fetchAvInterviewDifficulty, fetchAllLocations,
+  fetchCompanies, fetchAllReviews, fetchAvRating, fetchAllPositions, fetchAvInterviewDifficulty, fetchAllLocations, fetchAllReviewCounts,
 } from '../Actions';
 import ExploreCompany from './exploreCompany';
 import './explore.scss';
@@ -26,14 +26,18 @@ class Explore extends Component {
     this.props.fetchAllPositions();
     this.props.fetchAvInterviewDifficulty();
     this.props.fetchAllLocations();
+    this.props.fetchAllReviewCounts();
   }
 
   // Company should have a rating
   makeStateMap = () => {
     // console.log('here');
     const bigMap = new Map();
+    console.log(`hi${this.props.allCompanyReviewCounts}`);
     if (this.props.allCompanyLocations != null
-       && this.props.allCompanyInterviewDifficulty != null && this.props.allCompanyRatings != null && this.props.allCompanies != null && this.props.allCompanyPositions != null) {
+       && this.props.allCompanyInterviewDifficulty != null && this.props.allCompanyRatings != null && this.props.allCompanies != null
+       && this.props.allCompanyPositions != null && this.props.allCompanyReviewCounts != null) {
+      console.log('test');
       for (let i = 0; i < this.props.allCompanies.length; i += 1) {
         const currComp = this.props.allCompanies[i];
         const company = currComp.CompanyName;
@@ -41,11 +45,14 @@ class Explore extends Component {
         const positions = this.props.allCompanyPositions.has(company) ? this.props.allCompanyPositions.get(company) : 'N/a';
         const avInterviewDifficulty = this.props.allCompanyInterviewDifficulty.has(company) ? this.props.allCompanyInterviewDifficulty.get(company) : 'N/a';
         const locations = this.props.allCompanyLocations.has(company) ? this.props.allCompanyLocations.get(company) : 'N/a';
+        const reviewCount = this.props.allCompanyReviewCounts.has(company) ? this.props.allCompanyReviewCounts.get(company) : 'N/a';
+        console.log(reviewCount);
         const compData = {
           avRating,
           positions,
           avInterviewDifficulty,
           locations,
+          reviewCount,
         };
         bigMap.set(company, compData);
       }
@@ -206,19 +213,19 @@ class Explore extends Component {
         const locationHere = bigMap.get(key).locations;
         if (this.state.selectValue === 'Filter By Position' && this.state.selectLocationValue === 'Filter By Location') {
           return (
-            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} />
+            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} reviewCount={bigMap.get(key).reviewCount} />
           );
         } else if (this.state.selectLocationValue === 'Filter By Location' && positionsHere !== 'N/a' && positionsHere.has(this.state.selectValue)) {
           return (
-            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} />
+            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} reviewCount={bigMap.get(key).reviewCount} />
           );
         } else if (this.state.selectValue === 'Filter By Position' && locationHere !== 'N/a' && locationHere.has(this.state.selectLocationValue)) {
           return (
-            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} />
+            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} reviewCount={bigMap.get(key).reviewCount} />
           );
         } else if (locationHere !== 'N/a' && locationHere.has(this.state.selectLocationValue) && positionsHere !== 'N/a' && positionsHere.has(this.state.selectValue)) {
           return (
-            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} />
+            <ExploreCompany name={key} rating={bigMap.get(key).avRating} interviewDi={bigMap.get(key).avInterviewDifficulty} reviewCount={bigMap.get(key).reviewCount} />
           );
         } else { return null; }
       });
@@ -245,9 +252,10 @@ function mapStateToProps(state) {
     allCompanyRatings: state.company.allCompanyRatings,
     allCompanyInterviewDifficulty: state.company.allCompanyInterviewDifficulty,
     allCompanyLocations: state.company.allCompanyLocations,
+    allCompanyReviewCounts: state.company.allCompanyReviewCounts,
   };
 }
 
 export default withRouter(connect(mapStateToProps, {
-  fetchAllPositions, fetchCompanies, fetchAllReviews, fetchAvRating, fetchAvInterviewDifficulty, fetchAllLocations,
+  fetchAllPositions, fetchCompanies, fetchAllReviews, fetchAvRating, fetchAvInterviewDifficulty, fetchAllLocations, fetchAllReviewCounts,
 })(Explore));

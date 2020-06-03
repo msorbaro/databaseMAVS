@@ -43,7 +43,7 @@ class AddCompany extends Component {
   sizeDropdown = () => {
     return (
       // mysql requiring int
-      <select value={this.state.size} onChange={this.sizeChange}>
+      <select id="addcompany-select" value={this.state.size} onChange={this.sizeChange}>
         <option value="15"> 0-15 people </option>
         <option value="200"> 16-200 people </option>
         <option value="500"> 201-500 people </option>
@@ -68,7 +68,9 @@ class AddCompany extends Component {
           {this.sizeDropdown()}
           <p className="company-input-name"> Company Field: </p>
           <input className="company-text-box" onChange={this.fieldChange} value={this.state.field} />
-          <button className="submit-company" type="button" onClick={this.submit}> submit </button>
+          <div>
+            <button className="submit-company" type="button" onClick={this.submit}> submit </button>
+          </div>
         </div>
       </div>
     );

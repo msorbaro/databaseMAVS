@@ -11,6 +11,7 @@ const initialState = {
   allCompanyPositions: null,
   allCompanyInterviewDifficulty: null,
   allCompanyLocations: null,
+  allCompanyReviewCounts: null,
 };
 
 
@@ -34,6 +35,8 @@ const companyReducer = (state = initialState, action) => {
       return { ...state, allCompanyInterviewDifficulty: action.payload };
     case ActionTypes.FETCH_ALL_LOCATIONS:
       return { ...state, allCompanyLocations: action.payload };
+    case ActionTypes.FETCH_ALL_REVIEW_COUNTS:
+      return { ...state, allCompanyReviewCounts: action.payload };
     default:
       return state;
   }
